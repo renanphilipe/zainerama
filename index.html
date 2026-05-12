@@ -421,7 +421,7 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center"><h2>PAINEL ADMIN</h2><p style="font-family:'Inter',sans-serif;font-size:14px;color:var(--gray);margin-bottom:32px">Acesse com suas credenciais</p></div>
       <div class="login-form-wrap">
         <div class="msg" id="loginMsg"></div>
-        <div class="form-group"><label>Usuário</label><input type="text" id="loginUser" placeholder="admin"></div>
+        <div class="form-group"><label>Usuário</label><input type="text" id="loginUser" placeholder="zainerama"></div>
         <div class="form-group"><label>Senha</label><input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
         <button class="btn-admin" onclick="doLogin()" style="width:100%">ENTRAR</button>
       </div>
@@ -465,13 +465,11 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 </div>
 
 <script>
-// ── STATE ──
-const S = {
+// ── DEFAULTS ──
+const DEFAULTS = {
   pw: 'Zai@2811',
   siteUrl: 'https://wa.me/5581999999999',
-  isAdmin: false,
-  pendingEdit: null, // {type:'hero'} or {type:'card', gid, idx}
-  anims: {}, // raf handles per group
+  heroImg: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
   groups: [
     {
       id: 1,
@@ -502,6 +500,40 @@ const S = {
       ]
     }
   ]
+};
+
+// ── PERSIST ──
+function loadState() {
+  try {
+    const saved = localStorage.getItem('zainerama_state');
+    if (saved) return JSON.parse(saved);
+  } catch(e) {}
+  return null;
+}
+function saveState() {
+  try {
+    localStorage.setItem('zainerama_state', JSON.stringify({
+      pw: S.pw,
+      siteUrl: S.siteUrl,
+      heroImg: S.heroImg,
+      groups: S.groups
+    }));
+  } catch(e) {
+    // localStorage pode estar cheio (base64 de imagens grandes)
+    console.warn('Não foi possível salvar no localStorage:', e.message);
+  }
+}
+
+// ── STATE ──
+const _saved = loadState();
+const S = {
+  pw:          _saved?.pw       ?? DEFAULTS.pw,
+  siteUrl:     _saved?.siteUrl  ?? DEFAULTS.siteUrl,
+  heroImg:     _saved?.heroImg  ?? DEFAULTS.heroImg,
+  groups:      _saved?.groups   ?? DEFAULTS.groups,
+  isAdmin: false,
+  pendingEdit: null,
+  anims: {},
 };
 
 // ── CARD SIZE ──
@@ -641,19 +673,23 @@ document.getElementById('fileInput').addEventListener('change', function(e) {
   reader.onload = ev => {
     const src = ev.target.result;
     if (pending.type === 'hero') {
+      S.heroImg = src;
       document.getElementById('heroImg').src = src;
+      saveState();
     } else if (pending.type === 'card') {
       const { gid, idx } = pending;
       const g = S.groups.find(x => x.id === gid);
       if (g) {
         g.images[idx] = src;
         document.querySelectorAll(`.c-card[data-gid="${gid}"][data-idx="${idx}"] img`).forEach(im => im.src = src);
+        saveState();
         if (document.getElementById('adminContent').style.display !== 'none') renderAdminList();
       }
     } else if (pending.type === 'newcard') {
       const g = S.groups.find(x => x.id === pending.gid);
       if (g) {
         g.images.push(src);
+        saveState();
         renderAll();
         renderAdminList();
         showMsg('carouselMsg','Imagem adicionada!','success');
@@ -707,6 +743,7 @@ function saveContactLink() {
   if (!u) { showMsg('linkMsg','Insira um link válido.','error'); return; }
   S.siteUrl = u;
   ['cb1','cb2','cb3','cb4','pb1','pb2','pb3'].forEach(id => { const el = document.getElementById(id); if (el) el.href = u; });
+  saveState();
   showMsg('linkMsg','Link atualizado!','success');
 }
 
@@ -720,6 +757,7 @@ function changePassword() {
   if (n !== f) { showMsg('pwMsg','Senhas não coincidem.','error'); return; }
   S.pw = n;
   ['pwCurrent','pwNew','pwConfirm'].forEach(id => document.getElementById(id).value = '');
+  saveState();
   showMsg('pwMsg','Senha alterada!','success');
 }
 
@@ -728,6 +766,7 @@ function addGroup() {
   const t = prompt('Nome do grupo:');
   if (!t || !t.trim()) return;
   S.groups.push({ id: Date.now(), title: t.trim(), images: [] });
+  saveState();
   renderAll();
   renderAdminList();
   showMsg('carouselMsg','Grupo criado!','success');
@@ -736,6 +775,7 @@ function deleteGroup(id) {
   if (!confirm('Excluir este grupo?')) return;
   if (S.anims[id]) cancelAnimationFrame(S.anims[id]);
   S.groups = S.groups.filter(g => g.id !== id);
+  saveState();
   renderAll();
   renderAdminList();
   showMsg('carouselMsg','Grupo removido.','success');
@@ -748,34 +788,21 @@ function renameGroup(id) {
   g.title = t.trim();
   const el = document.querySelector(`#cg-${id} .carousel-group-title`);
   if (el) el.textContent = g.title;
+  saveState();
   renderAdminList();
 }
 function addImgToGroup(id) {
   const g = S.groups.find(x => x.id === id);
   if (!g) return;
   S.pendingEdit = { type: 'newcard', gid: id };
-  const fi = document.getElementById('fileInput');
-  const orig = fi.onchange;
-  fi.onchange = function(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => {
-      g.images.push(ev.target.result);
-      renderAll();
-      renderAdminList();
-      showMsg('carouselMsg','Imagem adicionada!','success');
-    };
-    reader.readAsDataURL(file);
-    fi.value = ''; fi.onchange = null;
-  };
-  fi.click();
+  document.getElementById('fileInput').click();
 }
 function addUrlToGroup(id) {
   const g = S.groups.find(x => x.id === id);
   const u = prompt('URL da imagem:');
   if (!u || !u.trim() || !g) return;
   g.images.push(u.trim());
+  saveState();
   renderAll();
   renderAdminList();
   showMsg('carouselMsg','Imagem adicionada!','success');
@@ -784,6 +811,7 @@ function removeImg(gid, idx) {
   const g = S.groups.find(x => x.id === gid);
   if (!g) return;
   g.images.splice(idx, 1);
+  saveState();
   renderAll();
   renderAdminList();
 }
@@ -819,6 +847,14 @@ function toggleMenu() { document.getElementById('mobile-menu').classList.toggle(
 function closeMenu() { document.getElementById('mobile-menu').classList.remove('open'); }
 
 // ── INIT ──
+// Restore hero image
+document.getElementById('heroImg').src = S.heroImg;
+// Restore contact links
+if (_saved?.siteUrl) {
+  ['cb1','cb2','cb3','cb4','pb1','pb2','pb3'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.href = S.siteUrl;
+  });
+}
 renderAll();
 </script>
 </body>
