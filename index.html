@@ -201,8 +201,8 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 <body>
 
 <nav>
-  <a href="#" class="logo" id="logoWrap">
-    <div class="logo-img-wrap" id="logoImgWrap" onclick="adminImgClick('logo')">
+  <a href="#" class="logo" id="logoWrap" onclick="handleLogoClick(event)">
+    <div class="logo-img-wrap" id="logoImgWrap">
       <img id="logoImg" src="" alt="Logo">
       <div class="logo-default-icon" id="logoDefault">Z</div>
     </div>
@@ -566,10 +566,18 @@ function closeLightbox(){
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLightbox(); });
 
 // ── ADMIN IMG CLICK ──
+function handleLogoClick(e){
+  if(!S.isAdmin) return;
+  e.preventDefault();
+  adminImgClick('logo');
+}
+
 function adminImgClick(type,extra){
   if(!S.isAdmin) return;
   S.pendingEdit={type,extra};
-  document.getElementById('fileInput').click();
+  const fi=document.getElementById('fileInput');
+  fi.value='';
+  setTimeout(()=>fi.click(),0);
 }
 
 // Unified file handler
@@ -689,26 +697,131 @@ function removeImg(gid,idx){
   g.images.splice(idx,1);saveState();renderAll();renderAdminList();
 }
 
+// ── DRAG STATE ──
+const drag={gid:null,fromIdx:null,el:null};
+
 function renderAdminList(){
-  const list=document.getElementById('carousels-admin-list');list.innerHTML='';
+  const list=document.getElementById('carousels-admin-list');
+  list.innerHTML='';
   S.groups.forEach(g=>{
     const wrap=document.createElement('div');
     wrap.style.cssText='background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:20px;margin-bottom:20px';
-    const thumbs=g.images.map((img,i)=>
-      `<div class="img-thumb"><img src="${img||''}" alt="" onerror="this.parentElement.style.display='none'"><button class="img-thumb-del" onclick="removeImg(${g.id},${i})">✕</button></div>`
-    ).join('');
-    wrap.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-      <span style="font-family:var(--f-display);font-size:20px;letter-spacing:1px">${g.title}</span>
+
+    const header=document.createElement('div');
+    header.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:16px';
+    header.innerHTML=`<span style="font-family:var(--f-display);font-size:20px;letter-spacing:1px">${g.title}</span>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         <button class="btn-admin-ghost" onclick="renameGroup(${g.id})">✏ Renomear</button>
         <button class="btn-admin" style="padding:8px 16px;font-size:12px" onclick="addImgToGroup(${g.id})">+ Foto</button>
         <button class="btn-admin-ghost" style="padding:8px 16px;font-size:12px" onclick="addUrlToGroup(${g.id})">🔗 URL</button>
         <button class="btn-del" onclick="deleteGroup(${g.id})">Excluir</button>
-      </div></div>
-      <p style="font-size:12px;color:var(--gray);font-family:var(--f-text);margin-bottom:${g.images.length?'12px':'0'}">${g.images.length} imagem(ns)</p>
-      ${g.images.length?`<div class="images-preview">${thumbs}</div>`:'<p style="font-size:13px;color:rgba(255,255,255,.3);font-family:var(--f-text)">Nenhuma imagem.</p>'}`;
+      </div>`;
+    wrap.appendChild(header);
+
+    const hint=document.createElement('p');
+    hint.style.cssText='font-size:12px;color:var(--gray);font-family:var(--f-text);margin-bottom:'+(g.images.length?'12px':'0');
+    hint.textContent=g.images.length+' imagem(ns)'+(g.images.length?' — arraste para reordenar':'');
+    wrap.appendChild(hint);
+
+    if(g.images.length){
+      const grid=document.createElement('div');
+      grid.className='images-preview';
+      grid.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px';
+      grid.id=`admin-grid-${g.id}`;
+
+      g.images.forEach((img,i)=>{
+        const thumb=makeAdminThumb(g.id,i,img);
+        grid.appendChild(thumb);
+      });
+
+      // Drop zone after all cards
+      grid.addEventListener('dragover',e=>{
+        e.preventDefault();
+        const after=getDragAfterEl(grid,e.clientY,e.clientX);
+        const dragging=grid.querySelector('.dragging');
+        if(!dragging) return;
+        if(after===null) grid.appendChild(dragging);
+        else grid.insertBefore(dragging,after);
+      });
+
+      grid.addEventListener('drop',e=>{
+        e.preventDefault();
+        if(drag.gid!==g.id) return;
+        const cells=[...grid.querySelectorAll('.admin-thumb')];
+        const newOrder=cells.map(c=>parseInt(c.dataset.origIdx));
+        const newImages=newOrder.map(i=>g.images[i]);
+        g.images=newImages;
+        // Update origIdx
+        cells.forEach((c,i)=>c.dataset.origIdx=i);
+        saveState();
+        renderAll();
+        renderAdminList();
+      });
+
+      wrap.appendChild(grid);
+    } else {
+      const empty=document.createElement('p');
+      empty.style.cssText='font-size:13px;color:rgba(255,255,255,.3);font-family:var(--f-text)';
+      empty.textContent='Nenhuma imagem.';
+      wrap.appendChild(empty);
+    }
+
     list.appendChild(wrap);
   });
+}
+
+function makeAdminThumb(gid,idx,img){
+  const thumb=document.createElement('div');
+  thumb.className='img-thumb admin-thumb';
+  thumb.draggable=true;
+  thumb.dataset.origIdx=idx;
+  thumb.style.cssText='aspect-ratio:2/3;border-radius:8px;overflow:hidden;background:var(--dark3);border:1px solid rgba(255,255,255,.07);position:relative;cursor:grab;transition:opacity .2s,transform .2s';
+
+  const im=document.createElement('img');
+  im.src=img||''; im.alt='';
+  im.style.cssText='width:100%;height:100%;object-fit:cover;display:block;pointer-events:none';
+  im.onerror=()=>thumb.style.display='none';
+  thumb.appendChild(im);
+
+  // drag handle icon
+  const handle=document.createElement('div');
+  handle.style.cssText='position:absolute;top:4px;left:4px;background:rgba(0,0,0,.6);border-radius:4px;padding:2px 4px;font-size:10px;color:rgba(255,255,255,.6);pointer-events:none;user-select:none';
+  handle.textContent='⠿';
+  thumb.appendChild(handle);
+
+  const del=document.createElement('button');
+  del.className='img-thumb-del';
+  del.textContent='✕';
+  del.onclick=()=>removeImg(gid,idx);
+  thumb.appendChild(del);
+
+  // Drag events
+  thumb.addEventListener('dragstart',e=>{
+    drag.gid=gid; drag.fromIdx=idx; drag.el=thumb;
+    thumb.classList.add('dragging');
+    thumb.style.opacity='.35';
+    e.dataTransfer.effectAllowed='move';
+  });
+  thumb.addEventListener('dragend',()=>{
+    thumb.classList.remove('dragging');
+    thumb.style.opacity='1';
+    thumb.style.cursor='grab';
+  });
+
+  return thumb;
+}
+
+function getDragAfterEl(container,y,x){
+  const els=[...container.querySelectorAll('.admin-thumb:not(.dragging)')];
+  return els.reduce((closest,child)=>{
+    const box=child.getBoundingClientRect();
+    const cy=box.top+box.height/2;
+    const cx=box.left+box.width/2;
+    // Use vertical center primarily, then horizontal
+    const offset=y-cy||x-cx;
+    if(offset<0&&offset>closest.offset) return {offset,el:child};
+    return closest;
+  },{offset:-Infinity,el:null}).el;
 }
 
 function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
