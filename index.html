@@ -21,9 +21,9 @@ body{background:var(--dark);color:var(--white);font-family:var(--f-body);overflo
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(10,10,10,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;position:relative}
 /* Logo: free-floating, no box */
-.logo-img-wrap{width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
-.logo-img-wrap img{max-width:100%;max-height:100%;object-fit:contain;display:none;filter:drop-shadow(0 2px 8px rgba(233,30,140,.4))}
-.logo-default-icon{width:42px;height:42px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-size:22px;color:#fff}
+.logo-img-wrap{height:42px;width:auto;max-width:220px;display:flex;align-items:center;flex-shrink:0;position:relative}
+.logo-img-wrap img{height:42px;width:auto;max-width:220px;object-fit:contain;display:none;filter:drop-shadow(0 2px 8px rgba(233,30,140,.4))}
+.logo-default-icon{width:42px;height:42px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-size:22px;color:#fff;flex-shrink:0}
 .logo-text{font-family:var(--f-display);font-size:24px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
 .logo-edit-hint{display:none;position:absolute;top:calc(100%+8px);left:0;background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:700;letter-spacing:1px;color:#fff;white-space:nowrap;z-index:10;font-family:var(--f-body)}
 .admin-mode .logo:hover .logo-edit-hint{display:block}
@@ -206,7 +206,7 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
       <img id="logoImg" src="" alt="Logo">
       <div class="logo-default-icon" id="logoDefault">Z</div>
     </div>
-    <span class="logo-text">ZAINERAMA</span>
+    <span class="logo-text" id="logoTextName">ZAINERAMA</span>
     <span class="logo-edit-hint">✏ TROCAR LOGO</span>
   </a>
   <ul class="nav-links">
@@ -282,8 +282,8 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
   <div class="features-grid">
     <div class="feature-card"><div class="feature-icon" style="background:rgba(233,30,140,.12)">🎯</div><h3>Design Estratégico</h3><p>Cada elemento é pensado para comunicar a essência da sua marca e atrair o público certo.</p></div>
     <div class="feature-card"><div class="feature-icon" style="background:rgba(0,212,255,.12)">⚡</div><h3>Entrega Rápida</h3><p>Processo ágil e eficiente, sem abrir mão da qualidade. Sua marca pronta no prazo.</p></div>
-    <div class="feature-card"><div class="feature-icon" style="background:rgba(155,48,255,.12)">♾️</div><h3>Revisões Incluídas</h3><p>Trabalhamos até você estar 100% satisfeito. Revisões ilimitadas até o resultado perfeito.</p></div>
-    <div class="feature-card"><div class="feature-icon" style="background:rgba(233,30,140,.12)">📦</div><h3>Arquivos Completos</h3><p>Receba todos os arquivos em múltiplos formatos: SVG, PNG, PDF, AI e muito mais.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(155,48,255,.12)">♾️</div><h3>Revisões Incluídas</h3><p>Garantimos até 3 ajustes iniciais, otimizando a entrega e alinhando as expectativas.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(233,30,140,.12)">📦</div><h3>Arquivos Completos</h3><p>Receba todos os arquivos em múltiplos formatos: SVG, PNG, PDF e AI.</p></div>
     <div class="feature-card"><div class="feature-icon" style="background:rgba(0,212,255,.12)">🎨</div><h3>Estilo Único</h3><p>Zero templates prontos. Tudo criado do zero, exclusivamente para o seu negócio.</p></div>
     <div class="feature-card"><div class="feature-icon" style="background:rgba(155,48,255,.12)">💬</div><h3>Suporte Dedicado</h3><p>Atendimento personalizado durante todo o processo criativo, do briefing à entrega.</p></div>
   </div>
@@ -341,7 +341,7 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
   <div class="footer-inner">
     <a href="#" class="logo" style="pointer-events:none">
       <div class="logo-img-wrap"><img id="footerLogoImg" src="" alt="" style="display:none"><div class="logo-default-icon" id="footerLogoDefault">Z</div></div>
-      <span class="logo-text">ZAINERAMA</span>
+      <span class="logo-text" id="footerLogoText">ZAINERAMA</span>
     </a>
     <div style="display:flex;gap:28px;flex-wrap:wrap">
       <a href="#portfolios" style="color:var(--gray);text-decoration:none;font-size:13px;font-family:var(--f-text)">Portfólio</a>
@@ -375,7 +375,7 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
       </div>
       <div class="login-form-wrap">
         <div class="msg" id="loginMsg"></div>
-        <div class="form-group"><label>Usuário</label><input type="text" id="loginUser" placeholder="zainerama"></div>
+        <div class="form-group"><label>Usuário</label><input type="text" id="loginUser" placeholder="admin"></div>
         <div class="form-group"><label>Senha</label><input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
         <button class="btn-admin" onclick="doLogin()" style="width:100%">ENTRAR</button>
       </div>
@@ -467,8 +467,11 @@ function setLogoImg(src){
   if(!img)return;
   img.src=src; img.style.display='block';
   const def=document.getElementById('logoDefault'); if(def) def.style.display='none';
+  // Hide the text name and show the logo image in its place
+  const logoText=document.getElementById('logoTextName'); if(logoText) logoText.style.display='none';
   const fImg=document.getElementById('footerLogoImg');
   if(fImg){fImg.src=src;fImg.style.display='block';const fd=document.getElementById('footerLogoDefault');if(fd)fd.style.display='none';}
+  const fText=document.getElementById('footerLogoText'); if(fText) fText.style.display='none';
 }
 
 function setAvatarImg(idx,src){
