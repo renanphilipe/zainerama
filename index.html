@@ -145,7 +145,8 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 .logout-btn:hover{background:rgba(233,30,140,.28)!important}
 
 /* DB STATUS BADGE */
-.db-badge{position:fixed;bottom:28px;left:28px;z-index:200;display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:50px;font-family:var(--f-text);font-size:12px;font-weight:600;border:1px solid;backdrop-filter:blur(8px);transition:opacity .3s}
+.db-badge{position:fixed;bottom:28px;left:28px;z-index:200;display:none;align-items:center;gap:8px;padding:8px 16px;border-radius:50px;font-family:var(--f-text);font-size:12px;font-weight:600;border:1px solid;backdrop-filter:blur(8px);transition:opacity .3s}
+.admin-mode .db-badge{display:flex}
 .db-badge.supabase{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.3);color:#3ecf8e}
 .db-badge.local{background:rgba(255,165,0,.08);border-color:rgba(255,165,0,.3);color:#ffa500}
 .db-badge.loading{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:rgba(255,255,255,.4)}
@@ -379,7 +380,7 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
       <a href="#testimonials" style="color:var(--gray);text-decoration:none;font-size:13px;font-family:var(--f-text)">Depoimentos</a>
     </div>
   </div>
-  <p class="footer-copy">© 2025 Zainerama. Todos os direitos reservados.</p>
+  <p class="footer-copy">© 2025 Zainerama. Todos os direitos reservados. Feito com ❤️ para marcas únicas.</p>
 </footer>
 
 <!-- DB STATUS BADGE -->
@@ -574,11 +575,13 @@ const DB = {
   },
 
   async load(key, fallback){
-    // 1. Try Supabase
-    if(this.sb && this.online){
+    // 1. Always try Supabase first (public read — no auth needed)
+    if(this.sb){
       try{
         const val = await this.sb.get('zainerama_config', key);
         if(val !== null){
+          // Keep localStorage in sync for offline fallback
+          try{ localStorage.setItem(`zainerama_${key}`, val); } catch(e){}
           try{ return JSON.parse(val); } catch{ return val; }
         }
       } catch(e){ console.warn('[DB] Supabase load failed, using localStorage:', e.message); }
@@ -591,18 +594,18 @@ const DB = {
     return fallback;
   },
 
-  async save(key, value){
+  async   async save(key, value){
     const serialized = JSON.stringify(value);
     // Always save to localStorage as backup
     try{ localStorage.setItem(`zainerama_${key}`, serialized); } catch(e){ console.warn('[DB] localStorage save failed'); }
-    // Try Supabase first
+    // Try Supabase
     if(this.sb && this.online){
       try{
         await this.sb.upsert('zainerama_config', key, serialized);
         return true;
       } catch(e){
         console.warn('[DB] Supabase save failed, data kept in localStorage:', e.message);
-        return false; // saved to localStorage, but not Supabase
+        return false;
       }
     }
     return false;
@@ -649,15 +652,16 @@ const S = {
 async function init(){
   setBadge('loading', 'Conectando...');
 
-  // Load Supabase credentials from localStorage (they're stored there for bootstrap)
+  // Load Supabase credentials
   try{
     S.sbUrl = localStorage.getItem('zainerama_sbUrl') || '';
     S.sbKey = localStorage.getItem('zainerama_sbKey') || '';
   } catch(e){}
 
+  // Init client (public read — all visitors benefit, no login needed)
   DB.init(S.sbUrl, S.sbKey);
 
-  // Test Supabase connection
+  // Test connection silently (for badge display)
   if(S.sbUrl && S.sbKey){
     const ok = await DB.testSb();
     setBadge(ok ? 'supabase' : 'local', ok ? 'Supabase ativo' : 'Modo local (offline)');
@@ -665,7 +669,16 @@ async function init(){
     setBadge('local', 'Modo local (sem Supabase)');
   }
 
-  // Load all state
+  // Restore admin session from localStorage
+  try{
+    if(localStorage.getItem('zainerama_session') === 'admin'){
+      S.isAdmin = true;
+      document.body.classList.add('admin-mode');
+      document.getElementById('logoutBtn').style.display = 'flex';
+    }
+  } catch(e){}
+
+  // Load all state (Supabase → localStorage fallback, works for everyone)
   S.pw       = await DB.load('pw',       DEFAULTS.pw);
   S.siteUrl  = await DB.load('siteUrl',  DEFAULTS.siteUrl);
   S.heroImg  = await DB.load('heroImg',  DEFAULTS.heroImg);
@@ -886,6 +899,7 @@ function doLogin(){
     S.isAdmin=true;
     document.body.classList.add('admin-mode');
     document.getElementById('logoutBtn').style.display='flex';
+    try{ localStorage.setItem('zainerama_session','admin'); } catch(e){}
     showAC();
     renderAdminList();
     document.getElementById('contactUrl').value=S.siteUrl;
@@ -898,6 +912,7 @@ function doLogout(){
   S.isAdmin=false;
   document.body.classList.remove('admin-mode');
   document.getElementById('logoutBtn').style.display='none';
+  try{ localStorage.removeItem('zainerama_session'); } catch(e){}
   closeAdmin();
 }
 function showAC(){ document.getElementById('loginScreen').style.display='none'; document.getElementById('adminContent').style.display=''; }
