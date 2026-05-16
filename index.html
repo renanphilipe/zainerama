@@ -7,18 +7,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
-:root{--pink:#e91e8c;--cyan:#00d4ff;--purple:#9b30ff;--dark:#0a0a0a;--dark2:#111;--dark3:#1a1a1a;--white:#fff;--gray:#888;--grad:linear-gradient(135deg,var(--pink),var(--cyan));--grad2:linear-gradient(135deg,var(--purple),var(--pink));
---f-display:'Bebas Neue',Impact,sans-serif;
---f-body:'Syne','Segoe UI',Arial,sans-serif;
---f-text:'Inter','Segoe UI',Arial,sans-serif}
+:root{--pink:#e91e8c;--cyan:#00d4ff;--purple:#9b30ff;--dark:#0a0a0a;--dark2:#111;--dark3:#1a1a1a;--white:#fff;--gray:#888;--grad:linear-gradient(135deg,var(--pink),var(--cyan));--grad2:linear-gradient(135deg,var(--purple),var(--pink));--f-display:'Bebas Neue',Impact,sans-serif;--f-body:'Syne','Segoe UI',Arial,sans-serif;--f-text:'Inter','Segoe UI',Arial,sans-serif}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--dark);color:var(--white);font-family:var(--f-body);overflow-x:hidden}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--dark)}::-webkit-scrollbar-thumb{background:var(--pink);border-radius:2px}
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;background:rgba(10,10,10,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05)}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;position:relative}
 .logo-img-wrap{height:42px;width:auto;max-width:220px;display:flex;align-items:center;flex-shrink:0;position:relative}
@@ -36,7 +31,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
 .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
 
-/* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden}
 .hero-bg-glow{position:absolute;top:-100px;right:-100px;width:600px;height:600px;background:radial-gradient(circle,rgba(233,30,140,.15) 0%,transparent 70%);pointer-events:none}
 .hero-bg-glow2{position:absolute;bottom:-100px;left:-50px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,212,255,.08) 0%,transparent 70%);pointer-events:none}
@@ -58,7 +52,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .admin-mode .hero-img-wrap:hover .hero-edit-hint{display:block}
 .admin-mode .hero-img-wrap:hover img{filter:drop-shadow(0 32px 80px rgba(233,30,140,.4)) drop-shadow(0 8px 32px rgba(0,0,0,.7)) brightness(.75)}
 
-/* MARQUEE */
 .marquee-wrap{overflow:hidden;padding:22px 0;background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
 .marquee-track{display:flex;gap:48px;width:max-content;animation:marquee 22s linear infinite}
 .marquee-wrap:hover .marquee-track{animation-play-state:paused}
@@ -66,13 +59,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .marquee-item{display:flex;align-items:center;gap:12px;font-family:var(--f-display);font-size:18px;letter-spacing:2px;color:rgba(255,255,255,.3);white-space:nowrap}
 .marquee-item .dot{width:6px;height:6px;border-radius:50%;background:var(--grad);flex-shrink:0}
 
-/* SECTION */
 section{padding:100px 48px}
 .section-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--pink);margin-bottom:16px;font-family:var(--f-body)}
 .section-title{font-family:var(--f-display);font-size:clamp(36px,5vw,64px);line-height:1.05;margin-bottom:16px}
 .section-sub{color:rgba(255,255,255,.5);font-family:var(--f-text);font-size:15px;line-height:1.7;max-width:520px}
 
-/* CAROUSEL */
 #portfolios{padding-bottom:60px}
 .portfolios-header{text-align:center;margin-bottom:64px}
 .carousel-group{margin-bottom:80px}
@@ -93,7 +84,6 @@ section{padding:100px 48px}
 .c-card-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:rgba(255,255,255,.25);font-family:var(--f-text);font-size:12px}
 .c-card-ph svg{width:32px;height:32px;stroke:currentColor;stroke-width:1.5;fill:none;opacity:.5}
 
-/* LIGHTBOX */
 .lightbox{display:none;position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.92);backdrop-filter:blur(10px);align-items:center;justify-content:center;cursor:zoom-out}
 .lightbox.open{display:flex}
 .lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:14px;box-shadow:0 32px 80px rgba(0,0,0,.8);animation:lbIn .25s ease}
@@ -101,7 +91,6 @@ section{padding:100px 48px}
 .lightbox-close{position:absolute;top:24px;right:28px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;opacity:.7;transition:opacity .2s;z-index:1}
 .lightbox-close:hover{opacity:1}
 
-/* FEATURES */
 #features{background:var(--dark2)}
 .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:56px}
 .feature-card{background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:36px 32px;transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
@@ -112,7 +101,6 @@ section{padding:100px 48px}
 .feature-card h3{font-size:18px;font-weight:700;margin-bottom:12px;font-family:var(--f-body)}
 .feature-card p{color:rgba(255,255,255,.5);font-family:var(--f-text);font-size:14px;line-height:1.7}
 
-/* TESTIMONIALS */
 .testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:56px}
 .testimonial-card{background:var(--dark2);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:32px}
 .stars{color:var(--pink);font-size:16px;margin-bottom:16px}
@@ -128,23 +116,19 @@ section{padding:100px 48px}
 .author-info strong{display:block;font-size:14px;font-family:var(--f-body)}
 .author-info span{font-size:12px;color:var(--gray);font-family:var(--f-text)}
 
-/* CTA */
 #cta{text-align:center;position:relative;overflow:hidden;padding:120px 48px}
 #cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(233,30,140,.1) 0%,transparent 70%);pointer-events:none}
 
-/* FOOTER */
 footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);padding:48px 48px 32px}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-bottom:32px}
 .footer-copy{font-family:var(--f-text);font-size:13px;color:var(--gray);text-align:center;border-top:1px solid rgba(255,255,255,.06);padding-top:24px}
 
-/* FAB */
 .admin-fab{position:fixed;bottom:28px;right:28px;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:200}
 .admin-fab-btn{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.15);color:var(--gray);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s,color .2s,background .2s;font-size:20px;background:var(--dark2)}
 .admin-fab-btn:hover{border-color:var(--pink);color:var(--pink)}
 .logout-btn{background:rgba(233,30,140,.12);border-color:rgba(233,30,140,.35);color:var(--pink);font-size:12px;font-family:var(--f-body);font-weight:700;width:auto;padding:0 16px;height:36px;border-radius:50px;letter-spacing:1px;display:none}
 .logout-btn:hover{background:rgba(233,30,140,.28)!important}
 
-/* DB STATUS BADGE */
 .db-badge{position:fixed;bottom:28px;left:28px;z-index:200;display:none;align-items:center;gap:8px;padding:8px 16px;border-radius:50px;font-family:var(--f-text);font-size:12px;font-weight:600;border:1px solid;backdrop-filter:blur(8px);transition:opacity .3s}
 .admin-mode .db-badge{display:flex}
 .db-badge.supabase{background:rgba(62,207,142,.08);border-color:rgba(62,207,142,.3);color:#3ecf8e}
@@ -154,7 +138,6 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 .db-badge.loading .dot{animation:pulse 1.2s ease infinite}
 @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
 
-/* ADMIN PANEL */
 .admin-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.72);backdrop-filter:blur(6px)}
 .admin-overlay.open{display:flex;align-items:center;justify-content:center}
 .admin-panel{background:var(--dark2);border:1px solid rgba(255,255,255,.1);border-radius:24px;width:min(90vw,740px);max-height:90vh;overflow-y:auto;padding:40px;position:relative;animation:panelIn .3s ease}
@@ -170,7 +153,6 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 .form-group label{display:block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:8px;font-family:var(--f-body)}
 .form-group input,.form-group textarea{width:100%;background:var(--dark3);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px 16px;color:var(--white);font-family:var(--f-text);font-size:14px;outline:none;transition:border-color .2s;resize:vertical}
 .form-group input:focus,.form-group textarea:focus{border-color:var(--pink)}
-.form-group textarea{min-height:80px;line-height:1.5}
 .btn-admin{background:var(--grad);border:none;padding:12px 28px;border-radius:10px;color:#fff;font-family:var(--f-body);font-size:14px;font-weight:700;cursor:pointer;transition:opacity .2s}
 .btn-admin:hover{opacity:.85}
 .btn-admin-ghost{background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);padding:10px 20px;border-radius:10px;font-family:var(--f-body);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;margin-right:8px}
@@ -180,22 +162,19 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 .msg.error{background:rgba(255,50,50,.1);border:1px solid rgba(255,50,50,.3);color:#f66}
 .msg.info{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:var(--cyan)}
 
-/* SUPABASE CONFIG PANEL */
 .sb-config-box{background:var(--dark3);border:1px solid rgba(62,207,142,.2);border-radius:16px;padding:24px;margin-bottom:24px}
 .sb-config-box h4{font-family:var(--f-display);font-size:20px;letter-spacing:1px;color:#3ecf8e;margin-bottom:12px}
-.sb-config-box p{font-family:var(--f-text);font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:16px}
 .sb-status-row{display:flex;align-items:center;gap:10px;font-family:var(--f-text);font-size:13px;margin-bottom:16px}
 .sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .sb-dot.ok{background:#3ecf8e}.sb-dot.fail{background:#f66}.sb-dot.pending{background:#ffa500;animation:pulse 1.2s ease infinite}
 .code-block{background:#0d1117;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;font-family:monospace;font-size:12px;color:#c9d1d9;line-height:1.8;overflow-x:auto;margin-bottom:12px;white-space:pre}
 .code-block .kw{color:#ff7b72}.code-block .str{color:#a5d6ff}.code-block .cm{color:#8b949e;font-style:italic}
 .step-list{counter-reset:steps;list-style:none;padding:0;margin:0}
-.step-list li{counter-increment:steps;display:flex;gap:14px;margin-bottom:20px;font-family:var(--f-text);font-size:13px;color:rgba(255,255,255,.65);line-height:1.7}
+.step-list li{counter-increment:steps;display:flex;gap:14px;margin-bottom:16px;font-family:var(--f-text);font-size:13px;color:rgba(255,255,255,.65);line-height:1.7}
 .step-list li::before{content:counter(steps);min-width:26px;height:26px;border-radius:50%;background:var(--grad);color:#fff;font-family:var(--f-display);font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .step-list li strong{color:var(--white)}
 .step-list li code{background:rgba(255,255,255,.08);padding:2px 7px;border-radius:5px;font-size:11px;font-family:monospace;color:var(--cyan)}
 
-/* IMAGES PREVIEW */
 .images-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
 .img-thumb{aspect-ratio:2/3;border-radius:8px;overflow:hidden;background:var(--dark3);border:1px solid rgba(255,255,255,.07);position:relative}
 .img-thumb img{width:100%;height:100%;object-fit:cover;display:block}
@@ -205,11 +184,9 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 .btn-del:hover{background:rgba(255,50,50,.22)}
 #fileInput{display:none}
 
-/* LOGIN */
 .login-form-wrap{max-width:360px;margin:0 auto;width:100%}
 .login-form-wrap .form-group{text-align:left}
 
-/* MOBILE */
 .mobile-menu{display:none;position:fixed;top:73px;left:0;right:0;background:rgba(10,10,10,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.07);padding:20px 24px;flex-direction:column;gap:16px;z-index:99}
 .mobile-menu.open{display:flex}
 .mobile-menu a{color:rgba(255,255,255,.7);text-decoration:none;font-size:18px;font-weight:600;transition:color .2s;font-family:var(--f-body)}
@@ -238,11 +215,11 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
       <div class="logo-default-icon" id="logoDefault">Z</div>
     </div>
     <span class="logo-text" id="logoTextName">ZAINERAMA</span>
-    <span class="logo-edit-hint">✏ TROCAR LOGO</span>
+    <span class="logo-edit-hint">&#9999; TROCAR LOGO</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#portfolios">Portfólio</a></li>
-    <li><a href="#features">Serviços</a></li>
+    <li><a href="#portfolios">Portf&#243;lio</a></li>
+    <li><a href="#features">Servi&#231;os</a></li>
     <li><a href="#testimonials">Depoimentos</a></li>
   </ul>
   <a id="cb1" href="https://wa.me/5581999999999" target="_blank" class="btn-contact">FALE CONOSCO</a>
@@ -250,122 +227,116 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#portfolios" onclick="closeMenu()">Portfólio</a>
-  <a href="#features" onclick="closeMenu()">Serviços</a>
+  <a href="#portfolios" onclick="closeMenu()">Portf&#243;lio</a>
+  <a href="#features" onclick="closeMenu()">Servi&#231;os</a>
   <a href="#testimonials" onclick="closeMenu()">Depoimentos</a>
   <a id="cb2" href="https://wa.me/5581999999999" target="_blank" class="btn-contact" style="text-align:center">FALE CONOSCO</a>
 </div>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg-glow"></div><div class="hero-bg-glow2"></div>
   <div class="hero-content">
-    <span class="hero-tag">✦ Especialistas em Branding</span>
-    <h1>SEU NEGÓCIO É<br><span class="gt">ÚNICO.</span><br>SUA IDENTIDADE<br>TAMBÉM.</h1>
-    <p>Especialistas em <strong>branding e criação de logos</strong>, transformamos o propósito da sua empresa em uma marca visualmente impecável e estrategicamente posicionada para atrair os clientes certos.</p>
+    <span class="hero-tag">&#10022; Especialistas em Branding</span>
+    <h1>SEU NEG&#211;CIO &#201;<br><span class="gt">&#218;NICO.</span><br>SUA IDENTIDADE<br>TAMB&#201;M.</h1>
+    <p>Especialistas em <strong>branding e cria&#231;&#227;o de logos</strong>, transformamos o prop&#243;sito da sua empresa em uma marca visualmente impec&#225;vel e estrategicamente posicionada para atrair os clientes certos.</p>
     <div class="hero-btns">
       <a id="cb3" href="https://wa.me/5581999999999" target="_blank" class="btn-contact">FALE CONOSCO</a>
-      <a href="#portfolios" class="btn-outline">VER PORTFÓLIO</a>
+      <a href="#portfolios" class="btn-outline">VER PORTF&#211;LIO</a>
     </div>
   </div>
   <div class="hero-visual">
     <div class="hero-img-wrap" id="heroImgWrap" onclick="adminImgClick('hero')">
-      <img id="heroImg" src="https://picsum.photos/seed/brand1/600/500" alt="Design">
-      <div class="hero-edit-hint">✏ TROCAR FOTO</div>
+      <img id="heroImg" src="" alt="Design">
+      <div class="hero-edit-hint">&#9999; TROCAR FOTO</div>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <div class="marquee-item"><span class="dot"></span>CRIAÇÃO DE LOGOS</div>
+    <div class="marquee-item"><span class="dot"></span>CRIA&#199;&#195;O DE LOGOS</div>
     <div class="marquee-item"><span class="dot"></span>IDENTIDADE VISUAL</div>
     <div class="marquee-item"><span class="dot"></span>BRANDING COMPLETO</div>
-    <div class="marquee-item"><span class="dot"></span>DESIGN ESTRATÉGICO</div>
+    <div class="marquee-item"><span class="dot"></span>DESIGN ESTRAT&#201;GICO</div>
     <div class="marquee-item"><span class="dot"></span>MANUAL DE MARCA</div>
     <div class="marquee-item"><span class="dot"></span>TIPOGRAFIA</div>
     <div class="marquee-item"><span class="dot"></span>PALETA DE CORES</div>
-    <div class="marquee-item"><span class="dot"></span>CRIAÇÃO DE LOGOS</div>
+    <div class="marquee-item"><span class="dot"></span>CRIA&#199;&#195;O DE LOGOS</div>
     <div class="marquee-item"><span class="dot"></span>IDENTIDADE VISUAL</div>
     <div class="marquee-item"><span class="dot"></span>BRANDING COMPLETO</div>
-    <div class="marquee-item"><span class="dot"></span>DESIGN ESTRATÉGICO</div>
+    <div class="marquee-item"><span class="dot"></span>DESIGN ESTRAT&#201;GICO</div>
     <div class="marquee-item"><span class="dot"></span>MANUAL DE MARCA</div>
     <div class="marquee-item"><span class="dot"></span>TIPOGRAFIA</div>
     <div class="marquee-item"><span class="dot"></span>PALETA DE CORES</div>
   </div>
 </div>
 
-<!-- PORTFOLIO -->
 <section id="portfolios">
   <div class="portfolios-header">
-    <div class="section-label">✦ Nosso Trabalho</div>
-    <h2 class="section-title">PORTFÓLIO EM<br><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">DESTAQUE</span></h2>
-    <p class="section-sub" style="margin:0 auto">Cada projeto é uma história visual única. Confira alguns dos nossos trabalhos mais recentes.</p>
+    <div class="section-label">&#10022; Nosso Trabalho</div>
+    <h2 class="section-title">PORTF&#211;LIO EM<br><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">DESTAQUE</span></h2>
+    <p class="section-sub" style="margin:0 auto">Cada projeto &#233; uma hist&#243;ria visual &#250;nica. Confira alguns dos nossos trabalhos mais recentes.</p>
   </div>
   <div id="portfolios-container"></div>
 </section>
 
-<!-- FEATURES -->
 <section id="features">
-  <div class="section-label">✦ O que oferecemos</div>
+  <div class="section-label">&#10022; O que oferecemos</div>
   <h2 class="section-title">POR QUE ESCOLHER<br>A <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">ZAINERAMA?</span></h2>
   <div class="features-grid">
-    <div class="feature-card"><div class="feature-icon" style="background:rgba(233,30,140,.12)">🎯</div><h3>Design Estratégico</h3><p>Cada elemento é pensado para comunicar a essência da sua marca e atrair o público certo.</p></div>
-    <div class="feature-card"><div class="feature-icon" style="background:rgba(0,212,255,.12)">⚡</div><h3>Entrega Rápida</h3><p>Processo ágil e eficiente, sem abrir mão da qualidade. Sua marca pronta no prazo.</p></div>
-    <div class="feature-card"><div class="feature-icon" style="background:rgba(155,48,255,.12)">♾️</div><h3>Revisões Incluídas</h3><p>Garantimos até 3 ajustes iniciais, otimizando a entrega e alinhando as expectativas.</p></div>
-    <div class="feature-card"><div class="feature-icon" style="background:rgba(233,30,140,.12)">📦</div><h3>Arquivos Completos</h3><p>Receba todos os arquivos em múltiplos formatos: SVG, PNG, PDF e AI.</p></div>
-    <div class="feature-card"><div class="feature-icon" style="background:rgba(0,212,255,.12)">🎨</div><h3>Estilo Único</h3><p>Zero templates prontos. Tudo criado do zero, exclusivamente para o seu negócio.</p></div>
-    <div class="feature-card"><div class="feature-icon" style="background:rgba(155,48,255,.12)">💬</div><h3>Suporte Dedicado</h3><p>Atendimento personalizado durante todo o processo criativo, do briefing à entrega.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(233,30,140,.12)">&#127919;</div><h3>Design Estrat&#233;gico</h3><p>Cada elemento &#233; pensado para comunicar a ess&#234;ncia da sua marca e atrair o p&#250;blico certo.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(0,212,255,.12)">&#9889;</div><h3>Entrega R&#225;pida</h3><p>Processo &#225;gil e eficiente, sem abrir m&#227;o da qualidade. Sua marca pronta no prazo.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(155,48,255,.12)">&#8734;&#65039;</div><h3>Revis&#245;es Inclu&#237;das</h3><p>Garantimos at&#233; 3 ajustes iniciais, otimizando a entrega e alinhando as expectativas.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(233,30,140,.12)">&#128230;</div><h3>Arquivos Completos</h3><p>Receba todos os arquivos em m&#250;ltiplos formatos: SVG, PNG, PDF e AI.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(0,212,255,.12)">&#127912;</div><h3>Estilo &#218;nico</h3><p>Zero templates prontos. Tudo criado do zero, exclusivamente para o seu neg&#243;cio.</p></div>
+    <div class="feature-card"><div class="feature-icon" style="background:rgba(155,48,255,.12)">&#128172;</div><h3>Suporte Dedicado</h3><p>Atendimento personalizado durante todo o processo criativo, do briefing &#224; entrega.</p></div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section id="testimonials">
   <div style="text-align:center;margin-bottom:64px">
-    <div class="section-label">✦ Clientes</div>
-    <h2 class="section-title">O QUE DIZEM<br><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SOBRE NÓS</span></h2>
+    <div class="section-label">&#10022; Clientes</div>
+    <h2 class="section-title">O QUE DIZEM<br><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SOBRE N&#211;S</span></h2>
   </div>
   <div class="testimonials-grid">
     <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       <blockquote>"A Zainerama transformou completamente a identidade da minha marca. O resultado superou todas as minhas expectativas!"</blockquote>
       <div class="testimonial-author">
         <div class="author-avatar" data-avid="0" onclick="adminImgClick('avatar',0)">
-          <img id="av-img-0" src="" alt=""><span class="av-letter">A</span><span class="av-edit">✏</span>
+          <img id="av-img-0" src="" alt=""><span class="av-letter">A</span><span class="av-edit">&#9999;</span>
         </div>
-        <div class="author-info"><strong>Ana Lima</strong><span>CEO – Studio Ana Lima</span></div>
+        <div class="author-info"><strong>Ana Lima</strong><span>CEO &#8211; Studio Ana Lima</span></div>
       </div>
     </div>
     <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
-      <blockquote>"Profissionalismo e criatividade em outro nível. Meu logo ficou exatamente o que eu sonhava, moderno e marcante."</blockquote>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <blockquote>"Profissionalismo e criatividade em outro n&#237;vel. Meu logo ficou exatamente o que eu sonhava, moderno e marcante."</blockquote>
       <div class="testimonial-author">
         <div class="author-avatar" style="background:var(--grad2)" data-avid="1" onclick="adminImgClick('avatar',1)">
-          <img id="av-img-1" src="" alt=""><span class="av-letter">R</span><span class="av-edit">✏</span>
+          <img id="av-img-1" src="" alt=""><span class="av-letter">R</span><span class="av-edit">&#9999;</span>
         </div>
-        <div class="author-info"><strong>Rafael Souza</strong><span>Fundador – RS Consultoria</span></div>
+        <div class="author-info"><strong>Rafael Souza</strong><span>Fundador &#8211; RS Consultoria</span></div>
       </div>
     </div>
     <div class="testimonial-card">
-      <div class="stars">★★★★★</div>
-      <blockquote>"Rápidos, criativos e muito atenciosos. O processo foi transparente e o resultado foi uma identidade visual incrível."</blockquote>
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <blockquote>"R&#225;pidos, criativos e muito atenciosos. O processo foi transparente e o resultado foi uma identidade visual incr&#237;vel."</blockquote>
       <div class="testimonial-author">
         <div class="author-avatar" style="background:linear-gradient(135deg,#9b30ff,#00d4ff)" data-avid="2" onclick="adminImgClick('avatar',2)">
-          <img id="av-img-2" src="" alt=""><span class="av-letter">M</span><span class="av-edit">✏</span>
+          <img id="av-img-2" src="" alt=""><span class="av-letter">M</span><span class="av-edit">&#9999;</span>
         </div>
-        <div class="author-info"><strong>Marina Ferreira</strong><span>Diretora – MF Estética</span></div>
+        <div class="author-info"><strong>Marina Ferreira</strong><span>Diretora &#8211; MF Est&#233;tica</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section id="cta">
-  <div class="section-label" style="text-align:center">✦ Pronto para começar?</div>
+  <div class="section-label" style="text-align:center">&#10022; Pronto para come&#231;ar?</div>
   <h2 class="section-title" style="text-align:center;font-size:clamp(40px,6vw,80px)">SUA MARCA MERECE<br><span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SER LEMBRADA</span></h2>
-  <p class="section-sub" style="margin:0 auto 48px;text-align:center">Vamos transformar a identidade visual do seu negócio. Entre em contato agora e receba um orçamento personalizado.</p>
-  <a id="cb4" href="https://wa.me/5581999999999" target="_blank" class="btn-contact" style="font-size:16px;padding:18px 48px">FALE CONOSCO AGORA →</a>
+  <p class="section-sub" style="margin:0 auto 48px;text-align:center">Vamos transformar a identidade visual do seu neg&#243;cio. Entre em contato agora e receba um or&#231;amento personalizado.</p>
+  <a id="cb4" href="https://wa.me/5581999999999" target="_blank" class="btn-contact" style="font-size:16px;padding:18px 48px">FALE CONOSCO AGORA &#8594;</a>
 </section>
 
 <footer>
@@ -375,38 +346,31 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
       <span class="logo-text" id="footerLogoText">ZAINERAMA</span>
     </a>
     <div style="display:flex;gap:28px;flex-wrap:wrap">
-      <a href="#portfolios" style="color:var(--gray);text-decoration:none;font-size:13px;font-family:var(--f-text)">Portfólio</a>
-      <a href="#features" style="color:var(--gray);text-decoration:none;font-size:13px;font-family:var(--f-text)">Serviços</a>
+      <a href="#portfolios" style="color:var(--gray);text-decoration:none;font-size:13px;font-family:var(--f-text)">Portf&#243;lio</a>
+      <a href="#features" style="color:var(--gray);text-decoration:none;font-size:13px;font-family:var(--f-text)">Servi&#231;os</a>
       <a href="#testimonials" style="color:var(--gray);text-decoration:none;font-size:13px;font-family:var(--f-text)">Depoimentos</a>
     </div>
   </div>
-  <p class="footer-copy">© 2025 Zainerama. Todos os direitos reservados. Feito com ❤️ para marcas únicas.</p>
+  <p class="footer-copy">&#169; 2025 Zainerama. Todos os direitos reservados. Feito com &#10084;&#65039; para marcas &#250;nicas.</p>
 </footer>
 
-<!-- DB STATUS BADGE -->
-<div class="db-badge loading" id="dbBadge">
-  <span class="dot"></span>
-  <span id="dbBadgeText">Conectando...</span>
-</div>
+<div class="db-badge loading" id="dbBadge"><span class="dot"></span><span id="dbBadgeText">Conectando...</span></div>
 
 <div class="admin-fab">
   <button class="admin-fab-btn logout-btn" id="logoutBtn" onclick="doLogout()">SAIR</button>
-  <button class="admin-fab-btn" onclick="openAdmin()" title="Painel Admin">⚙</button>
+  <button class="admin-fab-btn" onclick="openAdmin()" title="Painel Admin">&#9881;</button>
 </div>
 
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-close" onclick="closeLightbox()">&#10005;</button>
   <img id="lightboxImg" src="" alt="">
 </div>
 
 <input type="file" id="fileInput" accept="image/*">
 
-<!-- ADMIN OVERLAY -->
 <div class="admin-overlay" id="adminOverlay" onclick="overlayClose(event)">
   <div class="admin-panel" onclick="event.stopPropagation()">
-    <button class="admin-close" onclick="closeAdmin()">✕</button>
-
-    <!-- LOGIN -->
+    <button class="admin-close" onclick="closeAdmin()">&#10005;</button>
     <div id="loginScreen">
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
         <h2>PAINEL ADMIN</h2>
@@ -414,102 +378,63 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
       </div>
       <div class="login-form-wrap">
         <div class="msg" id="loginMsg"></div>
-        <div class="form-group"><label>Usuário</label><input type="text" id="loginUser" placeholder="admin"></div>
-        <div class="form-group"><label>Senha</label><input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+        <div class="form-group"><label>Usu&#225;rio</label><input type="text" id="loginUser" placeholder="zainerama"></div>
+        <div class="form-group"><label>Senha</label><input type="password" id="loginPass" onkeydown="if(event.key==='Enter')doLogin()"></div>
         <button class="btn-admin" onclick="doLogin()" style="width:100%">ENTRAR</button>
       </div>
     </div>
-
-    <!-- ADMIN CONTENT -->
     <div id="adminContent" style="display:none">
       <h2>PAINEL ADMIN</h2>
       <div class="admin-tabs">
         <button class="admin-tab active" onclick="switchTab('link')">Links</button>
-        <button class="admin-tab" onclick="switchTab('carousels')">Portfólios</button>
-        <button class="admin-tab" onclick="switchTab('supabase')">⚡ Supabase</button>
+        <button class="admin-tab" onclick="switchTab('carousels')">Portf&#243;lios</button>
+        <button class="admin-tab" onclick="switchTab('supabase')">&#9889; Supabase</button>
         <button class="admin-tab" onclick="switchTab('password')">Senha</button>
       </div>
-
-      <!-- TAB: LINKS -->
       <div class="admin-section active" id="tab-link">
         <div class="msg" id="linkMsg"></div>
-        <p style="font-family:var(--f-text);font-size:14px;color:var(--gray);margin-bottom:20px">Altere o link de todos os botões "Fale Conosco".</p>
+        <p style="font-family:var(--f-text);font-size:14px;color:var(--gray);margin-bottom:20px">Altere o link de todos os bot&#245;es "Fale Conosco".</p>
         <div class="form-group"><label>URL do WhatsApp / Contato</label><input type="url" id="contactUrl" placeholder="https://wa.me/..."></div>
         <button class="btn-admin" onclick="saveContactLink()">SALVAR</button>
       </div>
-
-      <!-- TAB: CAROUSELS -->
       <div class="admin-section" id="tab-carousels">
         <div class="msg" id="carouselMsg"></div>
         <div style="margin-bottom:24px">
-          <p style="font-family:var(--f-text);font-size:14px;color:var(--gray);margin-bottom:16px">Gerencie os grupos de portfólio. Com Supabase, use URLs de imagens externas (ex: Cloudinary, Supabase Storage).</p>
+          <p style="font-family:var(--f-text);font-size:14px;color:var(--gray);margin-bottom:16px">Gerencie os grupos de portf&#243;lio. Cole URLs p&#250;blicas do Supabase Storage.</p>
           <button class="btn-admin" onclick="addGroup()">+ NOVO GRUPO</button>
         </div>
         <div id="carousels-admin-list"></div>
       </div>
-
-      <!-- TAB: SUPABASE -->
       <div class="admin-section" id="tab-supabase">
         <div class="sb-config-box">
-          <h4>⚡ Configuração do Supabase</h4>
-          <div class="sb-status-row" id="sbStatusRow">
+          <h4>&#9889; Conex&#227;o Supabase</h4>
+          <div class="sb-status-row">
             <span class="sb-dot pending" id="sbDot"></span>
-            <span id="sbStatusText" style="font-family:var(--f-text);font-size:13px">Verificando conexão...</span>
+            <span id="sbStatusText" style="font-family:var(--f-text);font-size:13px">Verificando...</span>
           </div>
           <div class="msg" id="sbMsg"></div>
-          <div class="form-group"><label>Supabase URL</label><input type="url" id="sbUrl" placeholder="https://xxxxxxxxxxx.supabase.co"></div>
-          <div class="form-group"><label>Supabase Anon Key</label><input type="text" id="sbKey" placeholder="eyJhbGci..."></div>
-          <button class="btn-admin" onclick="saveSbConfig()" style="margin-right:10px">SALVAR E CONECTAR</button>
-          <button class="btn-admin-ghost" onclick="testSbConnection()">TESTAR CONEXÃO</button>
+          <div class="form-group"><label>Supabase URL</label><input type="url" id="sbUrl"></div>
+          <div class="form-group"><label>Supabase Anon Key</label><input type="text" id="sbKey"></div>
+          <button class="btn-admin" onclick="saveSbConfig()" style="margin-right:10px">SALVAR</button>
+          <button class="btn-admin-ghost" onclick="testSbConnection()">TESTAR</button>
         </div>
-
-        <div style="background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px;margin-bottom:24px">
-          <h4 style="font-family:var(--f-display);font-size:20px;letter-spacing:1px;margin-bottom:20px">📖 Como configurar — Passo a Passo</h4>
-          <ol class="step-list">
-            <li>Acesse <strong>supabase.com</strong>, crie uma conta gratuita e clique em <strong>"New Project"</strong>. Escolha um nome (ex: <code>zainerama</code>) e uma senha forte.</li>
-            <li>No painel do projeto, vá em <strong>Settings → API</strong>. Copie a <strong>Project URL</strong> e a chave <strong>anon / public</strong> e cole nos campos acima.</li>
-            <li>Agora crie a tabela. Vá em <strong>SQL Editor</strong> e execute o SQL abaixo — ele cria tudo automaticamente:</li>
-          </ol>
-          <div class="code-block"><span class="cm">-- Cole e execute no SQL Editor do Supabase</span>
-<span class="kw">CREATE TABLE IF NOT</span> EXISTS zainerama_config (
+        <div style="background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px">
+          <h4 style="font-family:var(--f-display);font-size:20px;letter-spacing:1px;margin-bottom:16px">SQL para criar a tabela</h4>
+          <div class="code-block"><span class="kw">CREATE TABLE IF NOT</span> EXISTS zainerama_config (
   key   <span class="kw">TEXT PRIMARY KEY</span>,
   value <span class="kw">TEXT NOT NULL</span>,
   updated_at <span class="kw">TIMESTAMPTZ DEFAULT</span> now()
 );
-
-<span class="cm">-- Habilitar Row Level Security (RLS)</span>
 <span class="kw">ALTER TABLE</span> zainerama_config <span class="kw">ENABLE ROW LEVEL SECURITY</span>;
-
-<span class="cm">-- Política: leitura pública (para carregar o site)</span>
-<span class="kw">CREATE POLICY</span> <span class="str">"public_read"</span>
-  <span class="kw">ON</span> zainerama_config <span class="kw">FOR SELECT</span>
-  <span class="kw">USING</span> (true);
-
-<span class="cm">-- Política: escrita apenas com anon key (admin autenticado)</span>
-<span class="kw">CREATE POLICY</span> <span class="str">"anon_write"</span>
-  <span class="kw">ON</span> zainerama_config
-  <span class="kw">FOR ALL USING</span> (true)
-  <span class="kw">WITH CHECK</span> (true);</div>
-          <ol class="step-list" style="counter-reset:steps 3">
-            <li>Cole a <strong>URL</strong> e a <strong>Anon Key</strong> nos campos acima e clique em <strong>SALVAR E CONECTAR</strong>. O badge no canto inferior esquerdo vai ficar verde ✅</li>
-            <li>Para imagens no portfólio com Supabase, use o <strong>Supabase Storage</strong>: vá em <strong>Storage → New Bucket</strong>, crie um bucket público chamado <code>portfolio</code>, faça upload das fotos e copie a URL pública de cada uma.</li>
-            <li>Pronto! Todos os dados do site (links, grupos, senhas) serão salvos no Supabase e sincronizados em qualquer dispositivo. O localStorage continua como backup automático.</li>
-          </ol>
-        </div>
-
-        <div style="background:rgba(255,165,0,.06);border:1px solid rgba(255,165,0,.2);border-radius:12px;padding:16px">
-          <p style="font-family:var(--f-text);font-size:13px;color:rgba(255,165,0,.9);line-height:1.7">
-            ⚠️ <strong>Nota sobre imagens:</strong> O Supabase armazena apenas texto/JSON. Para imagens, use o <strong>Supabase Storage</strong> ou serviços externos (Cloudinary, imgbb, etc.) e salve apenas as <strong>URLs</strong> no banco. O upload direto de arquivo funciona apenas com localStorage.
-          </p>
+<span class="kw">CREATE POLICY</span> <span class="str">"public_read"</span> <span class="kw">ON</span> zainerama_config <span class="kw">FOR SELECT USING</span> (true);
+<span class="kw">CREATE POLICY</span> <span class="str">"anon_write"</span> <span class="kw">ON</span> zainerama_config <span class="kw">FOR ALL USING</span> (true) <span class="kw">WITH CHECK</span> (true);</div>
         </div>
       </div>
-
-      <!-- TAB: SENHA -->
       <div class="admin-section" id="tab-password">
         <div class="msg" id="pwMsg"></div>
-        <div class="form-group"><label>Senha atual</label><input type="password" id="pwCurrent" placeholder="Senha atual"></div>
-        <div class="form-group"><label>Nova senha</label><input type="password" id="pwNew" placeholder="Nova senha"></div>
-        <div class="form-group"><label>Confirmar</label><input type="password" id="pwConfirm" placeholder="Repita a nova senha"></div>
+        <div class="form-group"><label>Senha atual</label><input type="password" id="pwCurrent"></div>
+        <div class="form-group"><label>Nova senha</label><input type="password" id="pwNew"></div>
+        <div class="form-group"><label>Confirmar</label><input type="password" id="pwConfirm"></div>
         <button class="btn-admin" onclick="changePassword()">ALTERAR</button>
       </div>
     </div>
@@ -517,635 +442,581 @@ footer{background:var(--dark2);border-top:1px solid rgba(255,255,255,.06);paddin
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════
-// SUPABASE CLIENT (lightweight — sem dependência npm)
-// ═══════════════════════════════════════════════════════════
-class SupabaseClient {
-  constructor(url, key){
-    this.url = url.replace(/\/$/, '');
-    this.key = key;
-    this.headers = {
-      'Content-Type': 'application/json',
-      'apikey': key,
-      'Authorization': `Bearer ${key}`
-    };
-  }
-  async get(table, keyVal){
-    const res = await fetch(`${this.url}/rest/v1/${table}?key=eq.${encodeURIComponent(keyVal)}&select=value`, {headers:this.headers});
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    return data[0]?.value ?? null;
-  }
-  async upsert(table, key, value){
-    const res = await fetch(`${this.url}/rest/v1/${table}`, {
-      method:'POST',
-      headers:{...this.headers, 'Prefer':'resolution=merge-duplicates'},
-      body: JSON.stringify({key, value, updated_at: new Date().toISOString()})
+(function() {
+"use strict";
+
+// ── CREDENCIAIS PRÉ-CONFIGURADAS ────────────────────────────
+var SB_URL = 'https://iwutsfqrdiqaddmoeqvf.supabase.co';
+var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3dXRzZnFyZGlxYWRkbW9lcXZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg4NzE1ODIsImV4cCI6MjA5NDQ0NzU4Mn0.mVGwUMl2uVjX2pZjWU3ddR8Xxbi0i7SqdRxAMzIsvrw';
+
+// ── SUPABASE STORAGE BASE ────────────────────────────────────
+// Pasta pública do bucket "portfolio" — imagens são lidas daqui como fallback
+var STORAGE_BASE = SB_URL + '/storage/v1/object/public/portfolio/';
+
+// ── SUPABASE CLIENT ──────────────────────────────────────────
+function SB(url, key) {
+  this.url = url.replace(/\/$/, '');
+  this.h = { 'Content-Type':'application/json', 'apikey':key, 'Authorization':'Bearer '+key };
+}
+SB.prototype.get = function(k) {
+  var self = this;
+  return fetch(self.url+'/rest/v1/zainerama_config?key=eq.'+encodeURIComponent(k)+'&select=value', { headers:self.h })
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(d){ return (d[0] && d[0].value != null) ? d[0].value : null; });
+};
+SB.prototype.set = function(k, v) {
+  var self = this;
+  return fetch(self.url+'/rest/v1/zainerama_config', {
+    method:'POST',
+    headers: Object.assign({}, self.h, {'Prefer':'resolution=merge-duplicates'}),
+    body: JSON.stringify({ key:k, value:v, updated_at:new Date().toISOString() })
+  }).then(function(r){ if(!r.ok) return r.text().then(function(t){ throw new Error(t); }); return true; });
+};
+SB.prototype.ping = function() {
+  var self = this;
+  return fetch(self.url+'/rest/v1/zainerama_config?select=key&limit=1', { headers:self.h })
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return true; });
+};
+// Lista arquivos de uma pasta no Storage
+SB.prototype.listStorage = function(folder) {
+  var self = this;
+  return fetch(self.url+'/storage/v1/object/list/portfolio', {
+    method:'POST',
+    headers: Object.assign({}, self.h, {'Content-Type':'application/json'}),
+    body: JSON.stringify({ prefix: folder ? folder+'/' : '', limit:100, offset:0 })
+  }).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(files){
+      return files
+        .filter(function(f){ return f.name && !f.name.endsWith('/'); })
+        .map(function(f){ return STORAGE_BASE + (folder ? folder+'/' : '') + f.name; });
     });
-    if(!res.ok){ const e = await res.text(); throw new Error(e); }
-    return true;
-  }
-  async testConnection(){
-    const res = await fetch(`${this.url}/rest/v1/zainerama_config?select=key&limit=1`, {headers:this.headers});
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    return true;
-  }
+};
+
+// ── DB LAYER ────────────────────────────────────────────────
+var db = new SB(SB_URL, SB_KEY);
+var dbOnline = false;
+
+function dbTest() {
+  return db.ping()
+    .then(function(){ dbOnline = true; return true; })
+    .catch(function(){ dbOnline = false; return false; });
 }
 
-// ═══════════════════════════════════════════════════════════
-// STORAGE LAYER  (Supabase → localStorage fallback)
-// ═══════════════════════════════════════════════════════════
-const DB = {
-  sb: null,       // SupabaseClient instance or null
-  online: false,  // true = Supabase connected
+// Lê do Supabase (tabela config). Sem fallback localStorage.
+function dbLoad(key, fallback) {
+  return db.get(key)
+    .then(function(val) {
+      if (val === null) return fallback;
+      try { return JSON.parse(val); } catch(e) { return val; }
+    })
+    .catch(function(e) {
+      console.warn('[DB] load "'+key+'" falhou:', e.message);
+      return fallback;
+    });
+}
 
-  init(url, key){
-    if(url && key){
-      this.sb = new SupabaseClient(url, key);
-    } else {
-      this.sb = null;
-      this.online = false;
-    }
-  },
+// Salva no Supabase (tabela config).
+function dbSave(key, value) {
+  if (!dbOnline) { console.warn('[DB] offline, não salvou "'+key+'"'); return Promise.resolve(false); }
+  return db.set(key, JSON.stringify(value))
+    .then(function(){ return true; })
+    .catch(function(e){ console.warn('[DB] save "'+key+'" falhou:', e.message); return false; });
+}
 
-  async testSb(){
-    if(!this.sb) return false;
-    try{ await this.sb.testConnection(); this.online=true; return true; }
-    catch(e){ this.online=false; return false; }
-  },
-
-  async load(key, fallback){
-    // 1. Always try Supabase first (public read — no auth needed)
-    if(this.sb){
-      try{
-        const val = await this.sb.get('zainerama_config', key);
-        if(val !== null){
-          // Keep localStorage in sync for offline fallback
-          try{ localStorage.setItem(`zainerama_${key}`, val); } catch(e){}
-          try{ return JSON.parse(val); } catch{ return val; }
-        }
-      } catch(e){ console.warn('[DB] Supabase load failed, using localStorage:', e.message); }
-    }
-    // 2. localStorage fallback
-    try{
-      const raw = localStorage.getItem(`zainerama_${key}`);
-      if(raw !== null){ try{ return JSON.parse(raw); } catch{ return raw; } }
-    } catch(e){}
-    return fallback;
-  },
-
-  async   async save(key, value){
-    const serialized = JSON.stringify(value);
-    // Always save to localStorage as backup
-    try{ localStorage.setItem(`zainerama_${key}`, serialized); } catch(e){ console.warn('[DB] localStorage save failed'); }
-    // Try Supabase
-    if(this.sb && this.online){
-      try{
-        await this.sb.upsert('zainerama_config', key, serialized);
-        return true;
-      } catch(e){
-        console.warn('[DB] Supabase save failed, data kept in localStorage:', e.message);
-        return false;
-      }
-    }
-    return false;
-  }
-};
-
-// ═══════════════════════════════════════════════════════════
-// DEFAULTS
-// ═══════════════════════════════════════════════════════════
-const seeds = ['design1','logo2','brand3','creative4','studio5','visual6','art7','identity8',
-                'color9','type10','mark11','style12','shape13','form14','line15','space16'];
-const DEFAULTS = {
+// ── DEFAULTS / STATE ─────────────────────────────────────────
+var DEFAULTS = {
   pw: 'Zai@2811',
   siteUrl: 'https://wa.me/5581999999999',
-  heroImg: 'https://picsum.photos/seed/brand1/600/500',
+  heroImg: '',
   logoImg: '',
   avatars: ['','',''],
-  groups: [
-    {id:1, title:'Logos & Identidade Visual', images: seeds.slice(0,8).map(s=>`https://picsum.photos/seed/${s}/400/600`)},
-    {id:2, title:'Branding Completo',          images: seeds.slice(8,16).map(s=>`https://picsum.photos/seed/${s}/400/600`)}
-  ]
+  // grupos vazios por padrão — serão preenchidos do Supabase ou do Storage
+  groups: []
 };
 
-// ═══════════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════════
-const S = {
-  pw: DEFAULTS.pw,
+var S = {
+  pw:      DEFAULTS.pw,
   siteUrl: DEFAULTS.siteUrl,
   heroImg: DEFAULTS.heroImg,
-  logoImg: '',
+  logoImg: DEFAULTS.logoImg,
   avatars: ['','',''],
-  groups: DEFAULTS.groups.map(g=>({...g, images:[...g.images]})),
+  groups:  [],
   isAdmin: false,
   pendingEdit: null,
   anims: {},
-  sbUrl: '',
-  sbKey: ''
+  sbUrl: SB_URL,
+  sbKey: SB_KEY
 };
 
-// ═══════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════
-async function init(){
+// ── INIT ────────────────────────────────────────────────────
+function init() {
   setBadge('loading', 'Conectando...');
 
-  // Load Supabase credentials
-  try{
-    S.sbUrl = localStorage.getItem('zainerama_sbUrl') || '';
-    S.sbKey = localStorage.getItem('zainerama_sbKey') || '';
-  } catch(e){}
-
-  // Init client (public read — all visitors benefit, no login needed)
-  DB.init(S.sbUrl, S.sbKey);
-
-  // Test connection silently (for badge display)
-  if(S.sbUrl && S.sbKey){
-    const ok = await DB.testSb();
-    setBadge(ok ? 'supabase' : 'local', ok ? 'Supabase ativo' : 'Modo local (offline)');
-  } else {
-    setBadge('local', 'Modo local (sem Supabase)');
-  }
-
-  // Restore admin session from localStorage
-  try{
-    if(localStorage.getItem('zainerama_session') === 'admin'){
+  // Restaura sessão admin (sessionStorage — dura até fechar a aba)
+  try {
+    if (sessionStorage.getItem('zainerama_admin') === '1') {
       S.isAdmin = true;
       document.body.classList.add('admin-mode');
       document.getElementById('logoutBtn').style.display = 'flex';
     }
-  } catch(e){}
+  } catch(e) {}
 
-  // Load all state (Supabase → localStorage fallback, works for everyone)
-  S.pw       = await DB.load('pw',       DEFAULTS.pw);
-  S.siteUrl  = await DB.load('siteUrl',  DEFAULTS.siteUrl);
-  S.heroImg  = await DB.load('heroImg',  DEFAULTS.heroImg);
-  S.logoImg  = await DB.load('logoImg',  '');
-  S.avatars  = await DB.load('avatars',  ['','','']);
-  S.groups   = await DB.load('groups',   DEFAULTS.groups.map(g=>({...g,images:[...g.images]})));
+  dbTest().then(function(ok) {
+    setBadge(ok ? 'supabase' : 'local', ok ? 'Supabase ativo' : 'Supabase offline');
 
-  applyUI();
-  renderAll();
-}
+    if (!ok) {
+      // Sem conexão: tenta carregar portfólio direto do Storage
+      console.warn('[init] Supabase offline — tentando Storage...');
+      return loadFromStorageFallback();
+    }
 
-function setBadge(type, text){
-  const b = document.getElementById('dbBadge');
-  b.className = `db-badge ${type}`;
-  document.getElementById('dbBadgeText').textContent = text;
-}
+    // Carrega tudo do Supabase (prioridade total)
+    return Promise.all([
+      dbLoad('pw',      DEFAULTS.pw),
+      dbLoad('siteUrl', DEFAULTS.siteUrl),
+      dbLoad('heroImg', DEFAULTS.heroImg),
+      dbLoad('logoImg', DEFAULTS.logoImg),
+      dbLoad('avatars', ['','','']),
+      dbLoad('groups',  [])
+    ]).then(function(vals) {
+      S.pw      = vals[0];
+      S.siteUrl = vals[1];
+      S.heroImg = vals[2];
+      S.logoImg = vals[3];
+      S.avatars = vals[4];
+      S.groups  = vals[5];
 
-// ═══════════════════════════════════════════════════════════
-// APPLY UI
-// ═══════════════════════════════════════════════════════════
-function applyUI(){
-  document.getElementById('heroImg').src = S.heroImg;
-  if(S.logoImg) setLogoImg(S.logoImg);
-  S.avatars.forEach((src,i)=>{ if(src) setAvatarImg(i,src); });
-  ['cb1','cb2','cb3','cb4'].forEach(id=>{
-    const el = document.getElementById(id); if(el) el.href = S.siteUrl;
+      // Se não há grupos cadastrados ainda, tenta popular do Storage
+      if (!S.groups || !S.groups.length) {
+        return loadFromStorageFallback();
+      }
+    });
+  }).then(function() {
+    applyUI();
+    renderAll();
+  }).catch(function(e) {
+    console.error('[init]', e);
+    applyUI();
+    renderAll();
   });
 }
 
-function setLogoImg(src){
-  const img = document.getElementById('logoImg'); if(!img) return;
-  img.src = src; img.style.display = 'block';
-  const def = document.getElementById('logoDefault'); if(def) def.style.display = 'none';
-  const lt  = document.getElementById('logoTextName'); if(lt) lt.style.display = 'none';
-  const fImg = document.getElementById('footerLogoImg');
-  if(fImg){ fImg.src=src; fImg.style.display='block';
-    const fd = document.getElementById('footerLogoDefault'); if(fd) fd.style.display='none'; }
-  const fT = document.getElementById('footerLogoText'); if(fT) fT.style.display='none';
+// Lê pastas do bucket "portfolio" e monta grupos automaticamente
+function loadFromStorageFallback() {
+  // Lista raiz para encontrar subpastas (arquivos com "/" no nome indicam pastas)
+  return fetch(db.url+'/storage/v1/object/list/portfolio', {
+    method:'POST',
+    headers: Object.assign({}, db.h, {'Content-Type':'application/json'}),
+    body: JSON.stringify({ prefix:'', limit:100, offset:0, sortBy:{ column:'name', order:'asc' } })
+  })
+  .then(function(r){ return r.ok ? r.json() : []; })
+  .then(function(items) {
+    // Separa pastas (id null = pasta) de arquivos soltos
+    var folders = items.filter(function(i){ return i.id === null; }).map(function(i){ return i.name; });
+    var rootFiles = items.filter(function(i){ return i.id !== null; })
+      .map(function(i){ return STORAGE_BASE + i.name; });
+
+    if (!folders.length && !rootFiles.length) return;
+
+    var tasks = [];
+
+    // Para cada pasta, lista os arquivos dentro
+    folders.forEach(function(folder) {
+      tasks.push(
+        db.listStorage(folder).then(function(urls) {
+          return { id: hashId(folder), title: prettify(folder), images: urls };
+        })
+      );
+    });
+
+    // Arquivos soltos na raiz viram um grupo "Portfólio"
+    if (rootFiles.length) {
+      tasks.push(Promise.resolve({ id: 1, title: 'Portf\u00f3lio', images: rootFiles }));
+    }
+
+    return Promise.all(tasks).then(function(groups) {
+      S.groups = groups.filter(function(g){ return g.images.length > 0; });
+    });
+  })
+  .catch(function(e){ console.warn('[Storage fallback]', e.message); });
 }
 
-function setAvatarImg(idx, src){
-  const img = document.getElementById(`av-img-${idx}`); if(!img) return;
-  img.src = src; img.style.display = 'block';
-  const letter = img.parentElement.querySelector('.av-letter');
-  if(letter) letter.style.opacity = '0';
+function hashId(str) {
+  var h = 0;
+  for (var i = 0; i < str.length; i++) h = (Math.imul(31, h) + str.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+function prettify(name) {
+  return name.replace(/[-_]/g,' ').replace(/\b\w/g, function(c){ return c.toUpperCase(); });
 }
 
-// ═══════════════════════════════════════════════════════════
-// CAROUSELS
-// ═══════════════════════════════════════════════════════════
-const CARD_W = ()=> window.innerWidth<=540?150:window.innerWidth<=900?180:220;
-const CARD_GAP = 16;
+function setBadge(type, text) {
+  var b = document.getElementById('dbBadge');
+  b.className = 'db-badge ' + type;
+  document.getElementById('dbBadgeText').textContent = text;
+}
 
-function renderAll(){
-  const cont = document.getElementById('portfolios-container');
-  cont.innerHTML = '';
-  Object.values(S.anims).forEach(id=>cancelAnimationFrame(id));
+// ── APPLY UI ────────────────────────────────────────────────
+function applyUI() {
+  if (S.heroImg) document.getElementById('heroImg').src = S.heroImg;
+  if (S.logoImg) setLogoImg(S.logoImg);
+  S.avatars.forEach(function(src, i){ if(src) setAvatarImg(i, src); });
+  ['cb1','cb2','cb3','cb4'].forEach(function(id){
+    var el = document.getElementById(id); if(el) el.href = S.siteUrl;
+  });
+}
+
+function setLogoImg(src) {
+  var img = document.getElementById('logoImg'); if(!img) return;
+  img.src = src; img.style.display = 'block';
+  var d = document.getElementById('logoDefault'); if(d) d.style.display = 'none';
+  var t = document.getElementById('logoTextName'); if(t) t.style.display = 'none';
+  var fi = document.getElementById('footerLogoImg');
+  if(fi){ fi.src = src; fi.style.display = 'block';
+    var fd = document.getElementById('footerLogoDefault'); if(fd) fd.style.display = 'none'; }
+  var ft = document.getElementById('footerLogoText'); if(ft) ft.style.display = 'none';
+}
+
+function setAvatarImg(idx, src) {
+  var img = document.getElementById('av-img-'+idx); if(!img) return;
+  img.src = src; img.style.display = 'block';
+  var l = img.parentElement.querySelector('.av-letter');
+  if(l) l.style.opacity = '0';
+}
+
+// ── CAROUSELS ───────────────────────────────────────────────
+function CW(){ return window.innerWidth<=540?150:window.innerWidth<=900?180:220; }
+var GAP = 16;
+
+function renderAll() {
+  var c = document.getElementById('portfolios-container');
+  c.innerHTML = '';
+  Object.keys(S.anims).forEach(function(id){ cancelAnimationFrame(S.anims[id]); });
   S.anims = {};
-  S.groups.forEach(g=>buildGroup(g, cont));
+  S.groups.forEach(function(g){ buildGroup(g, c); });
 }
 
-function buildGroup(g, cont){
-  const wrap  = document.createElement('div'); wrap.className='carousel-group'; wrap.id=`cg-${g.id}`;
-  const title = document.createElement('div'); title.className='carousel-group-title'; title.textContent=g.title;
+function buildGroup(g, cont) {
+  var wrap = document.createElement('div'); wrap.className='carousel-group'; wrap.id='cg-'+g.id;
+  var title = document.createElement('div'); title.className='carousel-group-title'; title.textContent=g.title;
   wrap.appendChild(title);
-  const vp    = document.createElement('div'); vp.className='carousel-viewport';
-  const track = document.createElement('div'); track.className='carousel-track'; track.id=`ct-${g.id}`;
+  var vp = document.createElement('div'); vp.className='carousel-viewport';
+  var track = document.createElement('div'); track.className='carousel-track'; track.id='ct-'+g.id;
   track._offset=0; track._paused=false;
   fillTrack(track, g);
   vp.appendChild(track); wrap.appendChild(vp); cont.appendChild(wrap);
-  vp.addEventListener('mouseenter', ()=>track._paused=true);
-  vp.addEventListener('mouseleave', ()=>track._paused=false);
+  vp.addEventListener('mouseenter', function(){ track._paused=true; });
+  vp.addEventListener('mouseleave', function(){ track._paused=false; });
   startAnim(g.id, track, g);
 }
 
-function fillTrack(track, g){
+function fillTrack(track, g) {
   track.innerHTML='';
-  if(!g.images.length){ track.appendChild(makeCard(g.id, 0, null)); return; }
-  const copies = Math.max(4, Math.ceil((window.innerWidth*2)/(g.images.length*(CARD_W()+CARD_GAP)))+2);
-  for(let r=0;r<copies;r++) g.images.forEach((src,i)=>track.appendChild(makeCard(g.id,i,src)));
+  if(!g.images.length){ track.appendChild(makeCard(g.id,0,null)); return; }
+  var copies = Math.max(4, Math.ceil((window.innerWidth*2)/(g.images.length*(CW()+GAP)))+2);
+  for(var r=0; r<copies; r++) g.images.forEach(function(src,i){ track.appendChild(makeCard(g.id,i,src)); });
 }
 
-function makeCard(gid, idx, src){
-  const card = document.createElement('div'); card.className='c-card'; card.dataset.gid=gid; card.dataset.idx=idx;
+function makeCard(gid, idx, src) {
+  var card = document.createElement('div'); card.className='c-card';
   if(src){
-    const img = document.createElement('img');
-    img.crossOrigin='anonymous'; img.src=src; img.alt='Portfolio'; img.loading='lazy';
-    img.onerror=()=>{ img.style.display='none'; addPlaceholder(card); };
+    var img = document.createElement('img');
+    img.crossOrigin='anonymous'; img.src=src; img.alt=''; img.loading='lazy';
+    img.onerror=function(){ img.style.display='none'; addPlaceholder(card); };
     card.appendChild(img);
   } else { addPlaceholder(card); }
-  const ov = document.createElement('div'); ov.className='c-card-overlay'; card.appendChild(ov);
-  const badge = document.createElement('div'); badge.className='c-card-edit'; badge.textContent='✏ TROCAR FOTO'; card.appendChild(badge);
-  card.addEventListener('click', ()=>{
-    if(S.isAdmin) adminImgClick('card', {gid, idx});
+  var ov = document.createElement('div'); ov.className='c-card-overlay'; card.appendChild(ov);
+  var badge = document.createElement('div'); badge.className='c-card-edit'; badge.textContent='TROCAR FOTO'; card.appendChild(badge);
+  card.addEventListener('click', function(){
+    if(S.isAdmin) adminImgClick('card', {gid:gid, idx:idx});
     else if(src) openLightbox(src);
   });
   return card;
 }
 
-function addPlaceholder(card){
-  const ph = document.createElement('div'); ph.className='c-card-ph';
-  ph.innerHTML=`<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Adicionar foto</span>`;
+function addPlaceholder(card) {
+  var ph = document.createElement('div'); ph.className='c-card-ph';
+  ph.innerHTML='<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Sem imagem</span>';
   card.appendChild(ph);
 }
 
-function startAnim(gid, track, g){
-  const speed = 0.45;
-  const loopW = g.images.length * (CARD_W()+CARD_GAP);
+function startAnim(gid, track, g) {
+  var speed=0.45, loopW=g.images.length*(CW()+GAP);
   function step(){
     if(!track._paused && loopW>0){
-      track._offset += speed;
-      if(track._offset >= loopW) track._offset -= loopW;
-      track.style.transform = `translateX(-${track._offset}px)`;
+      track._offset+=speed;
+      if(track._offset>=loopW) track._offset-=loopW;
+      track.style.transform='translateX(-'+track._offset+'px)';
     }
-    S.anims[gid] = requestAnimationFrame(step);
+    S.anims[gid]=requestAnimationFrame(step);
   }
-  S.anims[gid] = requestAnimationFrame(step);
+  S.anims[gid]=requestAnimationFrame(step);
 }
 
-// ═══════════════════════════════════════════════════════════
-// LIGHTBOX
-// ═══════════════════════════════════════════════════════════
-function openLightbox(src){
-  document.getElementById('lightboxImg').src=src;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
+// ── LIGHTBOX ────────────────────────────────────────────────
+function openLightbox(src){ document.getElementById('lightboxImg').src=src; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLightbox(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLightbox(); });
 
-// ═══════════════════════════════════════════════════════════
-// ADMIN IMAGE CLICK
-// ═══════════════════════════════════════════════════════════
-function handleLogoClick(e){
-  if(!S.isAdmin) return;
-  e.preventDefault();
-  adminImgClick('logo');
-}
+// ── ADMIN IMG ────────────────────────────────────────────────
+function handleLogoClick(e){ if(!S.isAdmin) return; e.preventDefault(); adminImgClick('logo'); }
 function adminImgClick(type, extra){
   if(!S.isAdmin) return;
-  S.pendingEdit = {type, extra};
-  const fi = document.getElementById('fileInput');
-  fi.value = '';
-  setTimeout(()=>fi.click(), 0);
+  S.pendingEdit={type:type, extra:extra};
+  // Com Supabase sempre pede URL (não usa FileReader/base64)
+  var url = prompt('Cole a URL pública da imagem (Supabase Storage, Cloudinary, etc.):');
+  if(!url||!url.trim()){ S.pendingEdit=null; return; }
+  applyImageUrl(S.pendingEdit, url.trim());
+  S.pendingEdit=null;
 }
 
-document.getElementById('fileInput').addEventListener('change', async function(){
-  const file = this.files[0]; this.value='';
-  if(!file || !S.pendingEdit) return;
-  const pending = S.pendingEdit; S.pendingEdit=null;
-
-  // If Supabase is active, prompt for URL instead of base64
-  if(DB.online){
-    const url = prompt('⚡ Supabase ativo: cole a URL pública da imagem (Supabase Storage, Cloudinary, etc.):');
-    if(!url || !url.trim()) return;
-    applyImageUrl(pending, url.trim());
-    return;
-  }
-
-  // Otherwise: base64 via FileReader (localStorage)
-  const reader = new FileReader();
-  reader.onload = async ev=>{
-    const src = ev.target.result;
-    applyImageUrl(pending, src);
-  };
-  reader.onerror = ()=>showMsg('carouselMsg','Erro ao ler o arquivo.','error');
-  reader.readAsDataURL(file);
+// fileInput mantido para compatibilidade mas não é o fluxo principal
+document.getElementById('fileInput').addEventListener('change', function(){
+  var file=this.files[0]; this.value='';
+  if(!file||!S.pendingEdit) return;
+  var pending=S.pendingEdit; S.pendingEdit=null;
+  var url=prompt('Cole a URL pública da imagem:');
+  if(!url||!url.trim()) return;
+  applyImageUrl(pending, url.trim());
 });
 
-async function applyImageUrl(pending, src){
+function applyImageUrl(pending, src) {
   if(pending.type==='hero'){
-    S.heroImg=src; document.getElementById('heroImg').src=src;
-    await DB.save('heroImg', src);
+    S.heroImg=src; document.getElementById('heroImg').src=src; dbSave('heroImg',src);
   } else if(pending.type==='logo'){
-    S.logoImg=src; setLogoImg(src);
-    await DB.save('logoImg', src);
+    S.logoImg=src; setLogoImg(src); dbSave('logoImg',src);
   } else if(pending.type==='avatar'){
-    const idx=pending.extra; S.avatars[idx]=src; setAvatarImg(idx,src);
-    await DB.save('avatars', S.avatars);
+    S.avatars[pending.extra]=src; setAvatarImg(pending.extra,src); dbSave('avatars',S.avatars);
   } else if(pending.type==='card'){
-    const {gid,idx}=pending.extra;
-    const g=S.groups.find(x=>x.id===gid);
-    if(g){ g.images[idx]=src; await DB.save('groups', S.groups); renderAll(); if(document.getElementById('adminContent').style.display!=='none') renderAdminList(); }
+    var g=S.groups.filter(function(x){ return x.id===pending.extra.gid; })[0];
+    if(g){ g.images[pending.extra.idx]=src; dbSave('groups',S.groups).then(function(){ renderAll(); renderAdminList(); }); }
   } else if(pending.type==='newcard'){
-    const g=S.groups.find(x=>x.id===pending.extra);
-    if(g){ g.images.push(src); await DB.save('groups', S.groups); renderAll(); renderAdminList(); showMsg('carouselMsg','Imagem adicionada!','success'); }
+    var ng=S.groups.filter(function(x){ return x.id===pending.extra; })[0];
+    if(ng){ ng.images.push(src); dbSave('groups',S.groups).then(function(){ renderAll(); renderAdminList(); showMsg('carouselMsg','Imagem adicionada!','success'); }); }
   }
 }
 
-// ═══════════════════════════════════════════════════════════
-// ADMIN PANEL
-// ═══════════════════════════════════════════════════════════
+// ── ADMIN PANEL ─────────────────────────────────────────────
 function openAdmin(){
   document.getElementById('adminOverlay').classList.add('open');
-  showMsg('loginMsg','','');
   if(S.isAdmin){
     showAC();
     renderAdminList();
-    document.getElementById('contactUrl').value = S.siteUrl;
-    document.getElementById('sbUrl').value = S.sbUrl;
-    document.getElementById('sbKey').value = S.sbKey;
-    updateSbStatusUI();
+    document.getElementById('contactUrl').value=S.siteUrl;
+    document.getElementById('sbUrl').value=S.sbUrl;
+    document.getElementById('sbKey').value=S.sbKey;
+    updateSbUI();
   } else {
     document.getElementById('loginScreen').style.display='';
     document.getElementById('adminContent').style.display='none';
+    showMsg('loginMsg','','');
   }
 }
 function closeAdmin(){ document.getElementById('adminOverlay').classList.remove('open'); }
 function overlayClose(e){ if(e.target===document.getElementById('adminOverlay')) closeAdmin(); }
 
 function doLogin(){
-  const u = document.getElementById('loginUser').value.trim();
-  const p = document.getElementById('loginPass').value;
+  var u=document.getElementById('loginUser').value.trim();
+  var p=document.getElementById('loginPass').value;
   if(u==='zainerama' && p===S.pw){
     S.isAdmin=true;
     document.body.classList.add('admin-mode');
     document.getElementById('logoutBtn').style.display='flex';
-    try{ localStorage.setItem('zainerama_session','admin'); } catch(e){}
-    showAC();
-    renderAdminList();
+    try{ sessionStorage.setItem('zainerama_admin','1'); }catch(e){}
+    showAC(); renderAdminList();
     document.getElementById('contactUrl').value=S.siteUrl;
     document.getElementById('sbUrl').value=S.sbUrl;
     document.getElementById('sbKey').value=S.sbKey;
-    updateSbStatusUI();
-  } else showMsg('loginMsg','Usuário ou senha incorretos.','error');
+    updateSbUI();
+  } else { showMsg('loginMsg','Usu\u00e1rio ou senha incorretos.','error'); }
 }
+
 function doLogout(){
   S.isAdmin=false;
   document.body.classList.remove('admin-mode');
   document.getElementById('logoutBtn').style.display='none';
-  try{ localStorage.removeItem('zainerama_session'); } catch(e){}
+  try{ sessionStorage.removeItem('zainerama_admin'); }catch(e){}
   closeAdmin();
 }
+
 function showAC(){ document.getElementById('loginScreen').style.display='none'; document.getElementById('adminContent').style.display=''; }
+
 function switchTab(t){
-  const keys=['link','carousels','supabase','password'];
-  document.querySelectorAll('.admin-tab').forEach((el,i)=>el.classList.toggle('active',keys[i]===t));
-  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(`tab-${t}`).classList.add('active');
-  if(t==='supabase') updateSbStatusUI();
+  var keys=['link','carousels','supabase','password'];
+  document.querySelectorAll('.admin-tab').forEach(function(el,i){ el.classList.toggle('active',keys[i]===t); });
+  document.querySelectorAll('.admin-section').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('tab-'+t).classList.add('active');
+  if(t==='supabase') updateSbUI();
 }
+
 function showMsg(id, text, type){
-  const el=document.getElementById(id);
-  el.textContent=text; el.className=`msg ${type}`; el.style.display=text?'block':'none';
-  if(text) setTimeout(()=>el.style.display='none', 4000);
+  var el=document.getElementById(id);
+  el.textContent=text; el.className='msg '+type; el.style.display=text?'block':'none';
+  if(text) setTimeout(function(){ el.style.display='none'; },4000);
 }
 
-async function saveContactLink(){
-  const u = document.getElementById('contactUrl').value.trim();
-  if(!u){ showMsg('linkMsg','Insira um link válido.','error'); return; }
+function saveContactLink(){
+  var u=document.getElementById('contactUrl').value.trim();
+  if(!u){ showMsg('linkMsg','Insira um link v\u00e1lido.','error'); return; }
   S.siteUrl=u;
-  ['cb1','cb2','cb3','cb4'].forEach(id=>{ const el=document.getElementById(id); if(el) el.href=u; });
-  await DB.save('siteUrl', u);
-  showMsg('linkMsg', DB.online?'Link salvo no Supabase!':'Link salvo (local).', 'success');
+  ['cb1','cb2','cb3','cb4'].forEach(function(id){ var el=document.getElementById(id); if(el) el.href=u; });
+  dbSave('siteUrl',u).then(function(ok){ showMsg('linkMsg',ok?'Salvo no Supabase!':'Erro ao salvar.',ok?'success':'error'); });
 }
 
-async function changePassword(){
-  const c=document.getElementById('pwCurrent').value,
-        n=document.getElementById('pwNew').value,
-        f=document.getElementById('pwConfirm').value;
+function changePassword(){
+  var c=document.getElementById('pwCurrent').value;
+  var n=document.getElementById('pwNew').value;
+  var f=document.getElementById('pwConfirm').value;
   if(c!==S.pw){ showMsg('pwMsg','Senha atual incorreta.','error'); return; }
-  if(!n||n.length<6){ showMsg('pwMsg','Mín. 6 caracteres.','error'); return; }
-  if(n!==f){ showMsg('pwMsg','Senhas não coincidem.','error'); return; }
+  if(!n||n.length<6){ showMsg('pwMsg','M\u00edn. 6 caracteres.','error'); return; }
+  if(n!==f){ showMsg('pwMsg','Senhas n\u00e3o coincidem.','error'); return; }
   S.pw=n;
-  ['pwCurrent','pwNew','pwConfirm'].forEach(id=>document.getElementById(id).value='');
-  await DB.save('pw', n);
-  showMsg('pwMsg', DB.online?'Senha alterada e salva no Supabase!':'Senha alterada (local).', 'success');
+  ['pwCurrent','pwNew','pwConfirm'].forEach(function(id){ document.getElementById(id).value=''; });
+  dbSave('pw',n).then(function(ok){ showMsg('pwMsg',ok?'Senha alterada no Supabase!':'Erro ao salvar.',ok?'success':'error'); });
 }
 
-// ═══════════════════════════════════════════════════════════
-// SUPABASE CONFIG ADMIN
-// ═══════════════════════════════════════════════════════════
-function updateSbStatusUI(){
-  const dot  = document.getElementById('sbDot');
-  const text = document.getElementById('sbStatusText');
-  if(DB.online){
-    dot.className='sb-dot ok'; text.textContent='Conectado ao Supabase ✓'; text.style.color='#3ecf8e';
-    setBadge('supabase','Supabase ativo');
-  } else if(S.sbUrl && S.sbKey){
-    dot.className='sb-dot fail'; text.textContent='Não conectado (verifique URL/Key)'; text.style.color='#f66';
-    setBadge('local','Modo local (offline)');
-  } else {
-    dot.className='sb-dot pending'; text.textContent='Não configurado'; text.style.color='rgba(255,255,255,.4)';
-    setBadge('local','Modo local (sem Supabase)');
-  }
+// ── SUPABASE CONFIG ──────────────────────────────────────────
+function updateSbUI(){
+  var dot=document.getElementById('sbDot'), txt=document.getElementById('sbStatusText');
+  if(dbOnline){ dot.className='sb-dot ok'; txt.textContent='Conectado'; txt.style.color='#3ecf8e'; setBadge('supabase','Supabase ativo'); }
+  else { dot.className='sb-dot fail'; txt.textContent='Desconectado'; txt.style.color='#f66'; setBadge('local','Supabase offline'); }
 }
 
-async function saveSbConfig(){
-  const url = document.getElementById('sbUrl').value.trim();
-  const key = document.getElementById('sbKey').value.trim();
-  if(!url || !key){ showMsg('sbMsg','Preencha URL e Anon Key.','error'); return; }
-  showMsg('sbMsg','Testando conexão...','info');
-  S.sbUrl=url; S.sbKey=key;
-  try{
-    localStorage.setItem('zainerama_sbUrl', url);
-    localStorage.setItem('zainerama_sbKey', key);
-  } catch(e){}
-  DB.init(url, key);
-  const ok = await DB.testSb();
-  if(ok){
-    showMsg('sbMsg','✅ Supabase conectado e ativo! Dados agora sincronizados na nuvem.','success');
-    // Sync current state to Supabase
-    await DB.save('pw',       S.pw);
-    await DB.save('siteUrl',  S.siteUrl);
-    await DB.save('heroImg',  S.heroImg);
-    await DB.save('logoImg',  S.logoImg);
-    await DB.save('avatars',  S.avatars);
-    await DB.save('groups',   S.groups);
-  } else {
-    showMsg('sbMsg','❌ Falha na conexão. Verifique a URL e a Anon Key, e se a tabela foi criada.','error');
-  }
-  updateSbStatusUI();
-}
-
-async function testSbConnection(){
-  const url = document.getElementById('sbUrl').value.trim();
-  const key = document.getElementById('sbKey').value.trim();
-  if(!url || !key){ showMsg('sbMsg','Preencha os campos antes de testar.','error'); return; }
+function saveSbConfig(){
+  var url=document.getElementById('sbUrl').value.trim();
+  var key=document.getElementById('sbKey').value.trim();
+  if(!url||!key){ showMsg('sbMsg','Preencha URL e Key.','error'); return; }
   showMsg('sbMsg','Testando...','info');
-  DB.init(url, key);
-  const ok = await DB.testSb();
-  if(ok) showMsg('sbMsg','✅ Conexão bem-sucedida!','success');
-  else   showMsg('sbMsg','❌ Falha. Verifique URL, Key e se a tabela existe.','error');
-  updateSbStatusUI();
+  db = new SB(url, key); S.sbUrl=url; S.sbKey=key;
+  dbTest().then(function(ok){
+    if(ok){
+      return Promise.all([dbSave('pw',S.pw),dbSave('siteUrl',S.siteUrl),dbSave('heroImg',S.heroImg),dbSave('logoImg',S.logoImg),dbSave('avatars',S.avatars),dbSave('groups',S.groups)])
+        .then(function(){ showMsg('sbMsg','Conectado e dados sincronizados!','success'); });
+    } else { showMsg('sbMsg','Falha. Verifique URL e Key.','error'); }
+    updateSbUI();
+  });
 }
 
-// ═══════════════════════════════════════════════════════════
-// CAROUSELS ADMIN
-// ═══════════════════════════════════════════════════════════
-async function addGroup(){
-  const t = prompt('Nome do grupo:'); if(!t||!t.trim()) return;
-  S.groups.push({id:Date.now(), title:t.trim(), images:[]});
-  await DB.save('groups', S.groups);
-  renderAll(); renderAdminList(); showMsg('carouselMsg','Grupo criado!','success');
+function testSbConnection(){
+  var url=document.getElementById('sbUrl').value.trim();
+  var key=document.getElementById('sbKey').value.trim();
+  if(!url||!key){ showMsg('sbMsg','Preencha os campos.','error'); return; }
+  showMsg('sbMsg','Testando...','info');
+  db=new SB(url,key);
+  dbTest().then(function(ok){ showMsg('sbMsg',ok?'Conex\u00e3o OK!':'Falha na conex\u00e3o.',ok?'success':'error'); updateSbUI(); });
 }
-async function deleteGroup(id){
+
+// ── CAROUSELS ADMIN ──────────────────────────────────────────
+function addGroup(){
+  var t=prompt('Nome do grupo:'); if(!t||!t.trim()) return;
+  S.groups.push({id:Date.now(),title:t.trim(),images:[]});
+  dbSave('groups',S.groups).then(function(){ renderAll(); renderAdminList(); showMsg('carouselMsg','Grupo criado!','success'); });
+}
+function deleteGroup(id){
   if(!confirm('Excluir este grupo?')) return;
   if(S.anims[id]) cancelAnimationFrame(S.anims[id]);
-  S.groups = S.groups.filter(g=>g.id!==id);
-  await DB.save('groups', S.groups);
-  renderAll(); renderAdminList(); showMsg('carouselMsg','Grupo removido.','success');
+  S.groups=S.groups.filter(function(g){ return g.id!==id; });
+  dbSave('groups',S.groups).then(function(){ renderAll(); renderAdminList(); showMsg('carouselMsg','Grupo removido.','success'); });
 }
-async function renameGroup(id){
-  const g=S.groups.find(x=>x.id===id); if(!g) return;
-  const t=prompt('Novo nome:',g.title); if(!t||!t.trim()) return;
+function renameGroup(id){
+  var g=S.groups.filter(function(x){ return x.id===id; })[0]; if(!g) return;
+  var t=prompt('Novo nome:',g.title); if(!t||!t.trim()) return;
   g.title=t.trim();
-  const el=document.querySelector(`#cg-${id} .carousel-group-title`); if(el) el.textContent=g.title;
-  await DB.save('groups', S.groups);
-  renderAdminList();
+  var el=document.querySelector('#cg-'+id+' .carousel-group-title'); if(el) el.textContent=g.title;
+  dbSave('groups',S.groups).then(function(){ renderAdminList(); });
 }
 function addImgToGroup(id){
-  if(DB.online){
-    const url = prompt('Cole a URL pública da imagem (Supabase Storage, Cloudinary, etc.):');
-    if(!url||!url.trim()) return;
-    addUrlToGroup(id, url.trim()); return;
-  }
-  S.pendingEdit={type:'newcard', extra:id};
-  document.getElementById('fileInput').click();
+  var url=prompt('Cole a URL p\u00fablica da imagem (Supabase Storage):');
+  if(!url||!url.trim()) return;
+  var g=S.groups.filter(function(x){ return x.id===id; })[0]; if(!g) return;
+  g.images.push(url.trim());
+  dbSave('groups',S.groups).then(function(){ renderAll(); renderAdminList(); showMsg('carouselMsg','Imagem adicionada!','success'); });
 }
-async function addUrlToGroup(id, urlOverride){
-  const g=S.groups.find(x=>x.id===id);
-  const u=urlOverride||prompt('URL da imagem:');
-  if(!u||!u.trim()||!g) return;
-  g.images.push(u.trim());
-  await DB.save('groups', S.groups);
-  renderAll(); renderAdminList(); showMsg('carouselMsg','Imagem adicionada!','success');
-}
-async function removeImg(gid, idx){
-  const g=S.groups.find(x=>x.id===gid); if(!g) return;
+function removeImg(gid,idx){
+  var g=S.groups.filter(function(x){ return x.id===gid; })[0]; if(!g) return;
   g.images.splice(idx,1);
-  await DB.save('groups', S.groups);
-  renderAll(); renderAdminList();
+  dbSave('groups',S.groups).then(function(){ renderAll(); renderAdminList(); });
 }
 
-// ── DRAG STATE ──
-const drag={gid:null,fromIdx:null,el:null};
+var drag={gid:null,el:null};
 
 function renderAdminList(){
-  const list=document.getElementById('carousels-admin-list'); list.innerHTML='';
-  S.groups.forEach(g=>{
-    const wrap=document.createElement('div');
+  var list=document.getElementById('carousels-admin-list'); list.innerHTML='';
+  S.groups.forEach(function(g){
+    var wrap=document.createElement('div');
     wrap.style.cssText='background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:20px;margin-bottom:20px';
-    const header=document.createElement('div');
-    header.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:16px';
-    header.innerHTML=`<span style="font-family:var(--f-display);font-size:20px;letter-spacing:1px">${g.title}</span>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <button class="btn-admin-ghost" onclick="renameGroup(${g.id})">✏ Renomear</button>
-        <button class="btn-admin" style="padding:8px 16px;font-size:12px" onclick="addImgToGroup(${g.id})">+ Foto</button>
-        <button class="btn-admin-ghost" style="padding:8px 16px;font-size:12px" onclick="addUrlToGroup(${g.id})">🔗 URL</button>
-        <button class="btn-del" onclick="deleteGroup(${g.id})">Excluir</button>
-      </div>`;
-    wrap.appendChild(header);
-    const hint=document.createElement('p');
-    hint.style.cssText='font-size:12px;color:var(--gray);font-family:var(--f-text);margin-bottom:'+(g.images.length?'12px':'0');
-    hint.textContent=g.images.length+' imagem(ns)'+(g.images.length?' — arraste para reordenar':'');
-    wrap.appendChild(hint);
+    wrap.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:16px">'
+      +'<span style="font-family:var(--f-display);font-size:20px;letter-spacing:1px">'+g.title+'</span>'
+      +'<div style="display:flex;gap:6px;flex-wrap:wrap">'
+      +'<button class="btn-admin-ghost" onclick="renameGroup('+g.id+')">Renomear</button>'
+      +'<button class="btn-admin" style="padding:8px 16px;font-size:12px" onclick="addImgToGroup('+g.id+')">+ URL</button>'
+      +'<button class="btn-del" onclick="deleteGroup('+g.id+')">Excluir</button>'
+      +'</div></div>'
+      +'<p style="font-size:12px;color:var(--gray);font-family:var(--f-text);margin-bottom:'+( g.images.length?'12px':'0')+'">'+g.images.length+' imagem(ns)'+(g.images.length?' \u2014 arraste para reordenar':'')+'</p>';
+
     if(g.images.length){
-      const grid=document.createElement('div');
-      grid.className='images-preview'; grid.id=`admin-grid-${g.id}`;
-      g.images.forEach((img,i)=>grid.appendChild(makeAdminThumb(g.id,i,img)));
-      grid.addEventListener('dragover',e=>{
+      var grid=document.createElement('div'); grid.className='images-preview'; grid.id='ag-'+g.id;
+      g.images.forEach(function(img,i){ grid.appendChild(makeThumb(g.id,i,img)); });
+      grid.addEventListener('dragover',function(e){
         e.preventDefault();
-        const after=getDragAfterEl(grid,e.clientY,e.clientX);
-        const dragging=grid.querySelector('.dragging');
-        if(!dragging) return;
-        if(after===null) grid.appendChild(dragging);
-        else grid.insertBefore(dragging,after);
+        var dr=grid.querySelector('.dragging'); if(!dr) return;
+        var af=getDragAfter(grid,e.clientY);
+        if(af===null) grid.appendChild(dr); else grid.insertBefore(dr,af);
       });
-      grid.addEventListener('drop',async e=>{
-        e.preventDefault();
-        if(drag.gid!==g.id) return;
-        const cells=[...grid.querySelectorAll('.admin-thumb')];
-        const newOrder=cells.map(c=>parseInt(c.dataset.origIdx));
-        g.images=newOrder.map(i=>g.images[i]);
-        cells.forEach((c,i)=>c.dataset.origIdx=i);
-        await DB.save('groups', S.groups);
-        renderAll(); renderAdminList();
+      grid.addEventListener('drop',function(e){
+        e.preventDefault(); if(drag.gid!==g.id) return;
+        var cells=Array.prototype.slice.call(grid.querySelectorAll('.adm-th'));
+        var ord=cells.map(function(c){ return parseInt(c.dataset.oi); });
+        var old=g.images.slice();
+        g.images=ord.map(function(i){ return old[i]; });
+        dbSave('groups',S.groups).then(function(){ renderAll(); renderAdminList(); });
       });
       wrap.appendChild(grid);
     } else {
-      const empty=document.createElement('p');
-      empty.style.cssText='font-size:13px;color:rgba(255,255,255,.3);font-family:var(--f-text)';
-      empty.textContent='Nenhuma imagem.';
-      wrap.appendChild(empty);
+      var em=document.createElement('p'); em.style.cssText='font-size:13px;color:rgba(255,255,255,.3);font-family:var(--f-text)'; em.textContent='Nenhuma imagem.'; wrap.appendChild(em);
     }
     list.appendChild(wrap);
   });
 }
 
-function makeAdminThumb(gid,idx,img){
-  const thumb=document.createElement('div');
-  thumb.className='img-thumb admin-thumb'; thumb.draggable=true; thumb.dataset.origIdx=idx;
-  thumb.style.cssText='aspect-ratio:2/3;border-radius:8px;overflow:hidden;background:var(--dark3);border:1px solid rgba(255,255,255,.07);position:relative;cursor:grab;transition:opacity .2s,transform .2s';
-  const im=document.createElement('img');
-  im.src=img||''; im.alt=''; im.style.cssText='width:100%;height:100%;object-fit:cover;display:block;pointer-events:none';
-  im.onerror=()=>thumb.style.display='none';
-  thumb.appendChild(im);
-  const handle=document.createElement('div');
-  handle.style.cssText='position:absolute;top:4px;left:4px;background:rgba(0,0,0,.6);border-radius:4px;padding:2px 4px;font-size:10px;color:rgba(255,255,255,.6);pointer-events:none;user-select:none';
-  handle.textContent='⠿'; thumb.appendChild(handle);
-  const del=document.createElement('button'); del.className='img-thumb-del'; del.textContent='✕';
-  del.onclick=()=>removeImg(gid,idx); thumb.appendChild(del);
-  thumb.addEventListener('dragstart',e=>{
-    drag.gid=gid; drag.fromIdx=idx; drag.el=thumb;
-    thumb.classList.add('dragging'); thumb.style.opacity='.35'; e.dataTransfer.effectAllowed='move';
-  });
-  thumb.addEventListener('dragend',()=>{ thumb.classList.remove('dragging'); thumb.style.opacity='1'; });
-  return thumb;
+function makeThumb(gid,idx,img){
+  var t=document.createElement('div');
+  t.className='img-thumb adm-th'; t.draggable=true; t.dataset.oi=idx;
+  t.style.cssText='aspect-ratio:2/3;border-radius:8px;overflow:hidden;background:var(--dark3);border:1px solid rgba(255,255,255,.07);position:relative;cursor:grab;transition:opacity .2s';
+  var im=document.createElement('img'); im.src=img||''; im.alt=''; im.style.cssText='width:100%;height:100%;object-fit:cover;display:block;pointer-events:none';
+  im.onerror=function(){ t.style.opacity='.3'; };
+  t.appendChild(im);
+  var del=document.createElement('button'); del.className='img-thumb-del'; del.textContent='x';
+  del.onclick=function(){ removeImg(gid,idx); }; t.appendChild(del);
+  t.addEventListener('dragstart',function(e){ drag.gid=gid; drag.el=t; t.classList.add('dragging'); t.style.opacity='.35'; e.dataTransfer.effectAllowed='move'; });
+  t.addEventListener('dragend',function(){ t.classList.remove('dragging'); t.style.opacity='1'; });
+  return t;
 }
-function getDragAfterEl(container,y,x){
-  const els=[...container.querySelectorAll('.admin-thumb:not(.dragging)')];
-  return els.reduce((closest,child)=>{
-    const box=child.getBoundingClientRect();
-    const offset=y-(box.top+box.height/2);
-    if(offset<0&&offset>closest.offset) return {offset,el:child};
-    return closest;
-  },{offset:-Infinity,el:null}).el;
+
+function getDragAfter(container,y){
+  var els=Array.prototype.slice.call(container.querySelectorAll('.adm-th:not(.dragging)'));
+  var res=els.reduce(function(cl,ch){
+    var box=ch.getBoundingClientRect(), off=y-(box.top+box.height/2);
+    if(off<0&&off>cl.offset) return {offset:off,el:ch}; return cl;
+  },{offset:-Infinity,el:null});
+  return res.el;
 }
 
 function toggleMenu(){ document.getElementById('mobile-menu').classList.toggle('open'); }
-function closeMenu(){  document.getElementById('mobile-menu').classList.remove('open'); }
+function closeMenu(){ document.getElementById('mobile-menu').classList.remove('open'); }
 
-// ── START ──
+// ── GLOBALS ──────────────────────────────────────────────────
+window.openAdmin=openAdmin; window.closeAdmin=closeAdmin; window.overlayClose=overlayClose;
+window.doLogin=doLogin; window.doLogout=doLogout; window.switchTab=switchTab;
+window.saveContactLink=saveContactLink; window.changePassword=changePassword;
+window.saveSbConfig=saveSbConfig; window.testSbConnection=testSbConnection;
+window.addGroup=addGroup; window.deleteGroup=deleteGroup; window.renameGroup=renameGroup;
+window.addImgToGroup=addImgToGroup; window.removeImg=removeImg;
+window.handleLogoClick=handleLogoClick; window.adminImgClick=adminImgClick;
+window.closeLightbox=closeLightbox; window.toggleMenu=toggleMenu; window.closeMenu=closeMenu;
+
 init();
+})();
 </script>
 </body>
 </html>
